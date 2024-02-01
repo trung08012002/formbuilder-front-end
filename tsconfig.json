@@ -18,7 +18,20 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    /* Configure paths */
+    "baseUrl": "./src",
+    "paths": {
+      "@configs": ["configs"],
+      "@configs/*": ["configs/*"],
+      "@utils": ["utils"],
+      "@utils/*": ["utils/*"],
+      "@atoms": ["components/atoms"],
+      "@atoms/*": ["components/atoms/*"],
+      "@templates": ["components/templates"],
+      "@templates/*": ["components/templates/*"]
+    }
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
