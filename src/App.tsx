@@ -1,5 +1,7 @@
-function App() {
-  return <h3>Welcome</h3>
-}
+import './index.css'
+import '@mantine/core/styles.css'
 
+function App() {
+  return <></>
+}
 export default App

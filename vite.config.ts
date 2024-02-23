@@ -16,6 +16,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@configs': pathResolve('src/configs'),
+      '@assets/images': pathResolve('src/assets/images'),
       '@utils': pathResolve('src/utils'),
       '@atoms': pathResolve('src/components/atoms'),
       '@templates': pathResolve('src/components/templates')

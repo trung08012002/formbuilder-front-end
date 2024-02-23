@@ -12,7 +12,20 @@ export default {
         'light-info': '#daebfa',
         'light-success': '#e1fada',
         'light-error': '#f8e0d1',
-        'light-warning': '#fef2cb'
+        'light-warning': '#fef2cb',
+        malachite: {
+          50: '#f2fcf1',
+          100: '#e2f8e0',
+          200: '#c5f0c2',
+          300: '#96e392',
+          400: '#48c642',
+          500: '#39b334',
+          600: '#2b9326',
+          700: '#247421',
+          800: '#215c1f',
+          900: '#1c4c1b',
+          950: '#0a290a'
+        }
       }
     }
   },

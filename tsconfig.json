@@ -25,6 +25,7 @@
     "paths": {
       "@configs": ["configs"],
       "@configs/*": ["configs/*"],
+      "@assets/*": ["assets/*"],
       "@utils": ["utils"],
       "@utils/*": ["utils/*"],
       "@atoms": ["components/atoms"],
@@ -33,6 +34,6 @@
       "@templates/*": ["components/templates/*"]
     }
   },
-  "include": ["src"],
+  "include": ["./src/image.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
