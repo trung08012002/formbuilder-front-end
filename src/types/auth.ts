@@ -5,6 +5,7 @@ export type UserAuth = {
   userId: string
   email: string
 }
+
 export type AuthResponse = SuccessResponse<{
   tokens: {
     accessToken: string
@@ -12,6 +13,7 @@ export type AuthResponse = SuccessResponse<{
   }
   user: UserAuth
 }>
+
 export interface Profile {
   userId: string
   email: string

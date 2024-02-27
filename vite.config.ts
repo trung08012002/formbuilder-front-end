@@ -16,10 +16,14 @@ export default defineConfig({
   resolve: {
     alias: {
       '@configs': pathResolve('src/configs'),
-      '@assets/images': pathResolve('src/assets/images'),
+      '@assets': pathResolve('src/assets'),
       '@utils': pathResolve('src/utils'),
       '@atoms': pathResolve('src/components/atoms'),
-      '@templates': pathResolve('src/components/templates')
+      '@molecules': pathResolve('src/components/molecules'),
+      '@organisms': pathResolve('src/components/organisms'),
+      '@templates': pathResolve('src/components/templates'),
+      '@pages': pathResolve('src/pages'),
+      '@types': pathResolve('src/types')
     }
   },
   base: '/'

@@ -13,6 +13,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
+    "allowUmdGlobalAccess": true,
 
     /* Linting */
     "strict": true,
@@ -25,15 +26,19 @@
     "paths": {
       "@configs": ["configs"],
       "@configs/*": ["configs/*"],
+      "@assets": ["assets"],
       "@assets/*": ["assets/*"],
       "@utils": ["utils"],
       "@utils/*": ["utils/*"],
-      "@atoms": ["components/atoms"],
       "@atoms/*": ["components/atoms/*"],
-      "@templates": ["components/templates"],
-      "@templates/*": ["components/templates/*"]
+      "@molecules/*": ["components/molecules/*"],
+      "@organisms/*": ["components/organisms/*"],
+      "@templates/*": ["components/templates/*"],
+      "@pages/*": ["pages/*"],
+      "@types": ["types"],
+      "@types/*": ["types/*"]
     }
   },
-  "include": ["./src/image.d.ts"],
+  "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
