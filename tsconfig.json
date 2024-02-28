@@ -42,9 +42,9 @@
       "@/redux": ["providers/redux"],
       "@/redux/*": ["providers/redux/*"],
       "@/apis": ["apis"],
-      "@/apis/*": ["apis/*"],
-    },
+      "@/apis/*": ["apis/*"]
+    }
   },
   "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }

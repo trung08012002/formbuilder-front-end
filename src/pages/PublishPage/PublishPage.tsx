@@ -1,1 +1,1 @@
-export const PublishPage = () => <div>Publish Page</div>
+export const PublishPage = () => <div>Publish Page</div>;

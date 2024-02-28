@@ -1,1 +1,1 @@
-export * from './BuildPage'
+export * from './BuildPage';

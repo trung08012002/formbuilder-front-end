@@ -1,1 +1,1 @@
-export * from './PublishPage'
+export * from './PublishPage';
