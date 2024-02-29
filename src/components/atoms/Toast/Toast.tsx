@@ -1,6 +1,8 @@
-import { TOAST_DURATION } from '@configs'
-import { ToastContainer, Zoom } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
+import { ToastContainer, Zoom } from 'react-toastify';
+
+import { TOAST_DURATION } from '@/configs';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 export const Toast = () => (
   <ToastContainer
@@ -14,4 +16,4 @@ export const Toast = () => (
     draggable={false}
     transition={Zoom}
   />
-)
+);

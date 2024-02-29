@@ -1,8 +1,17 @@
-import { Button } from '@atoms/Button'
-import { Avatar, Container, Group, Input, PasswordInput, Stack, Text } from '@mantine/core'
-import { UserInfoItem } from '@molecules/UserInfoItem'
-import { UploadImage, type ImageType } from '@types'
-import { ChangeEvent, useRef, useState } from 'react'
+import { ChangeEvent, useRef, useState } from 'react';
+import {
+  Avatar,
+  Container,
+  Group,
+  Input,
+  PasswordInput,
+  Stack,
+  Text,
+} from '@mantine/core';
+
+import { Button } from '@/atoms/Button';
+import { UserInfoItem } from '@/molecules/UserInfoItem';
+import { type ImageType, UploadImage } from '@/types';
 
 // TODO: remove this data later when have API
 const userData = {
@@ -10,60 +19,68 @@ const userData = {
   avatar: '',
   email: 'jane@gmail.com',
   organizationName: '',
-  organizationLogo: ''
-}
+  organizationLogo: '',
+};
 
 interface CurrentUser {
-  username: string
-  avatar: string
-  email: string
-  organizationName: string
-  organizationLogo: string
+  username: string;
+  avatar: string;
+  email: string;
+  organizationName: string;
+  organizationLogo: string;
 }
 
 export const AccountPage = () => {
-  const [editingFieldName, setEditingFieldName] = useState<string>('')
+  const [editingFieldName, setEditingFieldName] = useState<string>('');
   const [currentUser, setCurrentUser] = useState<CurrentUser>({
     username: userData.username ?? '',
     avatar: userData.avatar ?? '',
     email: userData.email ?? '',
     organizationName: userData.organizationName ?? '',
-    organizationLogo: userData.organizationLogo ?? ''
-  })
+    organizationLogo: userData.organizationLogo ?? '',
+  });
 
   const handleEdit = (fieldName: string) => {
-    setEditingFieldName(fieldName)
-  }
+    setEditingFieldName(fieldName);
+  };
 
   const handleCancelEdit = () => {
-    setEditingFieldName('')
-  }
+    setEditingFieldName('');
+  };
 
-  const avatarInputRef = useRef<HTMLInputElement>(null)
+  const avatarInputRef = useRef<HTMLInputElement>(null);
 
-  const logoInputRef = useRef<HTMLInputElement>(null)
+  const logoInputRef = useRef<HTMLInputElement>(null);
 
   const handleUploadImage = (type: ImageType) =>
-    type === UploadImage.AVATAR ? avatarInputRef.current?.click() : logoInputRef.current?.click()
+    type === UploadImage.AVATAR
+      ? avatarInputRef.current?.click()
+      : logoInputRef.current?.click();
 
-  const handleImageChange = (event: ChangeEvent<HTMLInputElement>, type: ImageType) => {
-    if (!event.target.files) return
-    const selectedFile = event.target.files[0]
-    const reader = new FileReader()
+  const handleImageChange = (
+    event: ChangeEvent<HTMLInputElement>,
+    type: ImageType,
+  ) => {
+    if (!event.target.files) return;
+    const selectedFile = event.target.files[0];
+    const reader = new FileReader();
     reader.onloadend = () => {
-      const base64Encoded = reader?.result?.toString() ?? ''
+      const base64Encoded = reader?.result?.toString() ?? '';
       if (type === UploadImage.AVATAR) {
-        setCurrentUser((prev) => ({ ...prev, avatar: base64Encoded }))
-        handleEdit('Avatar')
+        setCurrentUser((prev) => ({ ...prev, avatar: base64Encoded }));
+        handleEdit('Avatar');
       } else {
-        setCurrentUser((prev) => ({ ...prev, organizationLogo: base64Encoded }))
-        handleEdit('Organization Logo')
+        setCurrentUser((prev) => ({
+          ...prev,
+          organizationLogo: base64Encoded,
+        }));
+        handleEdit('Organization Logo');
       }
-    }
+    };
     if (selectedFile) {
-      reader.readAsDataURL(selectedFile)
+      reader.readAsDataURL(selectedFile);
     }
-  }
+  };
 
   const userInfoItems = [
     {
@@ -77,7 +94,7 @@ export const AccountPage = () => {
               onChange={(event) =>
                 setCurrentUser((prev) => ({
                   ...prev,
-                  username: event.target.value
+                  username: event.target.value,
                 }))
               }
               autoFocus
@@ -88,7 +105,7 @@ export const AccountPage = () => {
           <Text>{userData.username}</Text>
         ),
       hasEditButton: true,
-      isLastItem: false
+      isLastItem: false,
     },
     {
       fieldName: 'Password',
@@ -100,14 +117,22 @@ export const AccountPage = () => {
             <PasswordInput placeholder='Confirm password' />
             <Group>
               <Button title='Save' className='flex-1' />
-              <Button title='Cancel' color='gray' className='flex-1' onClick={handleCancelEdit} />
+              <Button
+                title='Cancel'
+                color='gray'
+                className='flex-1'
+                onClick={handleCancelEdit}
+              />
             </Group>
           </Stack>
         ) : (
-          <Button title='Change password' onClick={() => handleEdit('Password')} />
+          <Button
+            title='Change password'
+            onClick={() => handleEdit('Password')}
+          />
         ),
       hasEditButton: false,
-      isLastItem: false
+      isLastItem: false,
     },
     {
       fieldName: 'Avatar',
@@ -127,14 +152,19 @@ export const AccountPage = () => {
               title='Cancel'
               color='gray'
               onClick={() => {
-                setCurrentUser((prev) => ({ ...prev, avatar: userData.avatar ?? '' }))
-                handleCancelEdit()
+                setCurrentUser((prev) => ({
+                  ...prev,
+                  avatar: userData.avatar ?? '',
+                }));
+                handleCancelEdit();
               }}
             />
           </Group>
         ) : (
           <Group>
-            {userData.avatar ? <Avatar variant='filled' radius='sm' src={currentUser.avatar} /> : null}
+            {userData.avatar ? (
+              <Avatar variant='filled' radius='sm' src={currentUser.avatar} />
+            ) : null}
             <input
               type='file'
               ref={avatarInputRef}
@@ -149,7 +179,7 @@ export const AccountPage = () => {
           </Group>
         ),
       hasEditButton: false,
-      isLastItem: false
+      isLastItem: false,
     },
     {
       fieldName: 'Email',
@@ -162,7 +192,7 @@ export const AccountPage = () => {
               onChange={(event) =>
                 setCurrentUser((prev) => ({
                   ...prev,
-                  email: event.target.value
+                  email: event.target.value,
                 }))
               }
               autoFocus
@@ -173,7 +203,7 @@ export const AccountPage = () => {
           <Text>{userData.email}</Text>
         ),
       hasEditButton: true,
-      isLastItem: false
+      isLastItem: false,
     },
     {
       fieldName: 'Organization Name',
@@ -186,7 +216,7 @@ export const AccountPage = () => {
               onChange={(event) =>
                 setCurrentUser((prev) => ({
                   ...prev,
-                  organizationName: event.target.value
+                  organizationName: event.target.value,
                 }))
               }
               autoFocus
@@ -197,14 +227,18 @@ export const AccountPage = () => {
           <Text>{userData.organizationName}</Text>
         ),
       hasEditButton: true,
-      isLastItem: false
+      isLastItem: false,
     },
     {
       fieldName: 'Organization Logo',
       content:
         editingFieldName === 'Organization Logo' ? (
           <Group align='center'>
-            <Avatar variant='filled' radius='sm' src={currentUser.organizationLogo} />
+            <Avatar
+              variant='filled'
+              radius='sm'
+              src={currentUser.organizationLogo}
+            />
             <input
               type='file'
               ref={logoInputRef}
@@ -217,15 +251,22 @@ export const AccountPage = () => {
               title='Cancel'
               color='gray'
               onClick={() => {
-                setCurrentUser((prev) => ({ ...prev, organizationLogo: userData.organizationLogo ?? '' }))
-                handleCancelEdit()
+                setCurrentUser((prev) => ({
+                  ...prev,
+                  organizationLogo: userData.organizationLogo ?? '',
+                }));
+                handleCancelEdit();
               }}
             />
           </Group>
         ) : (
           <Group>
             {userData.organizationLogo ? (
-              <Avatar variant='filled' radius='sm' src={currentUser.organizationLogo} />
+              <Avatar
+                variant='filled'
+                radius='sm'
+                src={currentUser.organizationLogo}
+              />
             ) : null}
             <input
               type='file'
@@ -236,24 +277,32 @@ export const AccountPage = () => {
             />
             {userData.organizationLogo ? (
               <>
-                <Button title='Change logo' onClick={() => handleUploadImage(UploadImage.LOGO)} />
+                <Button
+                  title='Change logo'
+                  onClick={() => handleUploadImage(UploadImage.LOGO)}
+                />
                 <Button title='Remove' variant='outline' />
               </>
             ) : (
-              <Button title='Add organization logo' onClick={() => handleUploadImage(UploadImage.LOGO)} />
+              <Button
+                title='Add organization logo'
+                onClick={() => handleUploadImage(UploadImage.LOGO)}
+              />
             )}
           </Group>
         ),
       hasEditButton: false,
-      isLastItem: true
-    }
-  ]
+      isLastItem: true,
+    },
+  ];
 
   return (
     <Container size='xl' className='m-0 p-0'>
       <Stack className='h-full w-screen bg-malachite-600 px-60'>
         <Stack className='items-center justify-start gap-12 rounded-md bg-white px-14 py-7'>
-          <Text className='text-center text-3xl font-medium'>Update Account and General Information</Text>
+          <Text className='text-center text-3xl font-medium'>
+            Update Account and General Information
+          </Text>
           <Stack className='w-full gap-5'>
             {userInfoItems.map((item) => (
               <UserInfoItem
@@ -270,5 +319,5 @@ export const AccountPage = () => {
         </Stack>
       </Stack>
     </Container>
-  )
-}
+  );
+};

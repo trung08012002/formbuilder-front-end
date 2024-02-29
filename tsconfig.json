@@ -24,21 +24,21 @@
     /* Configure paths */
     "baseUrl": "./src",
     "paths": {
-      "@configs": ["configs"],
-      "@configs/*": ["configs/*"],
-      "@assets": ["assets"],
-      "@assets/*": ["assets/*"],
-      "@utils": ["utils"],
-      "@utils/*": ["utils/*"],
-      "@atoms/*": ["components/atoms/*"],
-      "@molecules/*": ["components/molecules/*"],
-      "@organisms/*": ["components/organisms/*"],
-      "@templates/*": ["components/templates/*"],
-      "@pages/*": ["pages/*"],
-      "@types": ["types"],
-      "@types/*": ["types/*"]
-    }
+      "@/configs": ["configs"],
+      "@/configs/*": ["configs/*"],
+      "@/assets": ["assets"],
+      "@/assets/*": ["assets/*"],
+      "@/utils": ["utils"],
+      "@/utils/*": ["utils/*"],
+      "@/atoms/*": ["components/atoms/*"],
+      "@/molecules/*": ["components/molecules/*"],
+      "@/organisms/*": ["components/organisms/*"],
+      "@/templates/*": ["components/templates/*"],
+      "@/pages/*": ["pages/*"],
+      "@/types": ["types"],
+      "@/types/*": ["types/*"],
+    },
   },
   "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "references": [{ "path": "./tsconfig.node.json" }],
 }

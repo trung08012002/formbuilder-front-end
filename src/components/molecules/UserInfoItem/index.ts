@@ -1,1 +1,1 @@
-export * from './UserInfoItem'
+export * from './UserInfoItem';

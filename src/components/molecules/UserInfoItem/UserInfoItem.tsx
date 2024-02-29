@@ -1,15 +1,16 @@
-import { Button } from '@atoms/Button'
-import { CloseButton, Divider, Flex, Text } from '@mantine/core'
-import { ReactNode } from 'react'
+import { ReactNode } from 'react';
+import { CloseButton, Divider, Flex, Text } from '@mantine/core';
+
+import { Button } from '@/atoms/Button';
 
 interface UserInfoItemProps {
-  editingFieldName: string
-  fieldName: string
-  content: ReactNode
-  handleEdit: (fieldName: string) => void
-  handleCancelEdit: () => void
-  hasEditButton: boolean
-  isLastItem: boolean
+  editingFieldName: string;
+  fieldName: string;
+  content: ReactNode;
+  handleEdit: (fieldName: string) => void;
+  handleCancelEdit: () => void;
+  hasEditButton: boolean;
+  isLastItem: boolean;
 }
 
 export const UserInfoItem = ({
@@ -19,23 +20,34 @@ export const UserInfoItem = ({
   handleEdit,
   handleCancelEdit,
   hasEditButton,
-  isLastItem
+  isLastItem,
 }: UserInfoItemProps) => (
   <>
     <Flex align='start' justify='space-between' gap='xl'>
       <Text className='font-bold' flex={1}>
         {fieldName}
       </Text>
-      <Flex align={editingFieldName === fieldName ? 'start' : 'center'} justify='space-between' flex={5}>
+      <Flex
+        align={editingFieldName === fieldName ? 'start' : 'center'}
+        justify='space-between'
+        flex={5}
+      >
         {content}
         {hasEditButton &&
           (editingFieldName === fieldName ? (
-            <CloseButton className='text-malachite-700 [&>svg]:!h-4 [&>svg]:!w-4' onClick={handleCancelEdit} />
+            <CloseButton
+              className='text-malachite-700 [&>svg]:!h-4 [&>svg]:!w-4'
+              onClick={handleCancelEdit}
+            />
           ) : (
-            <Button title='Edit' variant='subtle' onClick={() => handleEdit(fieldName)} />
+            <Button
+              title='Edit'
+              variant='subtle'
+              onClick={() => handleEdit(fieldName)}
+            />
           ))}
       </Flex>
     </Flex>
     {!isLastItem && <Divider className='my-3' />}
   </>
-)
+);

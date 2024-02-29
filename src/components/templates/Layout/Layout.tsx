@@ -1,15 +1,14 @@
-import { Toast } from '@atoms/Toast'
-import { ReactNode } from 'react'
+import { ReactNode } from 'react';
+
+import { Toast } from '@/atoms/Toast';
 
 interface LayoutProps {
-  children: ReactNode
+  children: ReactNode;
 }
 
-export const Layout = ({ children }: LayoutProps) => {
-  return (
-    <>
-      {children}
-      <Toast />
-    </>
-  )
-}
+export const Layout = ({ children }: LayoutProps) => (
+  <>
+    {children}
+    <Toast />
+  </>
+);

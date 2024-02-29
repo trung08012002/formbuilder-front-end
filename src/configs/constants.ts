@@ -1,5 +1,5 @@
 export const TOAST_DURATION = {
   DEFAULT: 3000,
   MEDIUM: 5000,
-  LONG: 7000
-}
+  LONG: 7000,
+};
