@@ -1,6 +1,6 @@
 import { Navigate, Outlet, useRoutes } from 'react-router-dom';
 
-import { PATH } from '@/constants/route.constanst';
+import { PATH } from '@/constants/route';
 import { LoginPage } from '@/pages/LoginPage';
 import { MyFormPage } from '@/pages/MyFormPage';
 import { RegisterPage } from '@/pages/RegisterPage';
@@ -9,7 +9,7 @@ import { RegisterPage } from '@/pages/RegisterPage';
 export function ProtectedRoute() {
   const isAuthenticated = Boolean();
 
-  return isAuthenticated ? <Outlet /> : <Navigate to={PATH.LOGIN} />;
+  return isAuthenticated ? <Outlet /> : <Navigate to={PATH.LOGIN_PAGE} />;
 }
 
 // route for page like login and register when not authenticated to navigate
@@ -22,25 +22,25 @@ export function RejectedRoute() {
 export function useRouteElements() {
   const routeElements = useRoutes([
     {
-      path: PATH.ORIGINAL,
+      path: PATH.ORIGINAL_PAGE,
       element: <RejectedRoute />,
       children: [
         {
-          path: PATH.ORIGINAL,
+          path: PATH.ORIGINAL_PAGE,
           element: <LoginPage />,
         },
         {
-          path: PATH.LOGIN,
+          path: PATH.LOGIN_PAGE,
           element: <LoginPage />,
         },
         {
-          path: PATH.REGISTER,
+          path: PATH.REGISTER_PAGE,
           element: <RegisterPage />,
         },
       ],
     },
     {
-      path: PATH.ORIGINAL,
+      path: PATH.ORIGINAL_PAGE,
       element: <ProtectedRoute />,
       children: [
         {

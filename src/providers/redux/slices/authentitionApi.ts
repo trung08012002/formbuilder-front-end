@@ -1,4 +1,4 @@
-import { API_URL } from '@/constants/api.constants';
+import { API_URL } from '@/constants/api';
 
 import { emptySplitApi } from './emptySplitApi';
 

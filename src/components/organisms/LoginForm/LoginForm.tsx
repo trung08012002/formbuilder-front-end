@@ -7,52 +7,41 @@ import { Button } from '@/atoms/Button';
 import { TextInput } from '@/molecules/TextInput';
 import { accountSchema } from '@/utils/schemas/rules';
 
-const registerSchema = accountSchema.pick([
-  'email',
-  'password',
-  'confirmPassword',
-  'username',
-]);
+const loginSchema = accountSchema.pick(['email', 'password']);
 
-export type RegisterSchema = yup.InferType<typeof registerSchema>;
+export type LoginSchema = yup.InferType<typeof loginSchema>;
 
-interface RegisterFormProps {
-  onSubmit: (value: RegisterSchema) => void;
+interface LoginFormProps {
+  onSubmit: (value: LoginSchema) => void;
 }
-export const RegisterForm = (props: RegisterFormProps) => {
+
+export const LoginForm = (props: LoginFormProps) => {
   const { onSubmit } = props;
   const initialValues = {
-    username: '',
     email: '',
     password: '',
-    confirmPassword: '',
   };
 
   return (
     <Formik
       initialValues={initialValues}
+      validationSchema={loginSchema}
       validateOnBlur={true}
       validateOnChange={false}
-      validationSchema={registerSchema}
       onSubmit={onSubmit}
     >
       <Form className='h-full w-full'>
-        <Field name='userName' label='User Name' component={TextInput} />
         <Field name='email' label='Email' component={TextInput} />
+
         <Field name='password' label='Password' component={TextInput} />
-        <Field
-          name='confirmPassword'
-          label='Confirm Password'
-          component={TextInput}
-        />
 
         <Center>
-          <Button title='Sign Up' type='submit' className='w-full' />
+          <Button title='Login' type='submit' className='w-full' />
         </Center>
         <div className='mt-3 flex items-center justify-center text-xs'>
-          <span className='text-gray-600'>You already have account?</span>
-          <Link to='/login' className='text-green-8 ml-1'>
-            Login
+          <span className='text-gray-600'>You don't have account yet?</span>
+          <Link to='/register' className='text-green-8 ml-1'>
+            Sign Up
           </Link>
         </div>
       </Form>
