@@ -28,6 +28,10 @@ export default {
           950: '#0a290a',
         },
       },
+      height: {
+        headerHeight: '90px',
+        contentHeight: `calc( 100vh - 90px)`,
+      },
     },
   },
   plugins: [],
