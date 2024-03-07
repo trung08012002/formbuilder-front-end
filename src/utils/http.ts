@@ -1,18 +1,18 @@
 import axios, { AxiosInstance } from 'axios';
 
-import { getAccessTokenFromLS, getRefreshTokenFromLS } from './auth';
+import { BACK_END_URL } from '@/configs';
+
+import { clearLS, getAccessTokenFromLS } from './auth';
 
 class Http {
   instance: AxiosInstance;
   private accessToken: string;
-  private refreshToken: string;
 
   constructor() {
     this.accessToken = getAccessTokenFromLS();
-    this.refreshToken = getRefreshTokenFromLS();
 
     this.instance = axios.create({
-      baseURL: process.env.BACK_END_URL,
+      baseURL: BACK_END_URL,
       timeout: 10000,
       headers: {
         'Content-Type': 'application/json',
@@ -31,7 +31,12 @@ class Http {
   setToken(token: string) {
     this.accessToken = token;
   }
+  public logout() {
+    clearLS();
+    this.accessToken = '';
+  }
 }
-const http = new Http().instance;
 
-export default http;
+export const httpClient = new Http();
+
+export const http = httpClient.instance;

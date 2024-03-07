@@ -1,4 +1,4 @@
 export const API_URL = {
-  URL_REGISTER: 'auth/register',
+  URL_SIGNUP: 'auth/signup',
   URL_LOGIN: 'auth/login',
 };

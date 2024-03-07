@@ -4,22 +4,24 @@ import { Field, Form, Formik } from 'formik';
 import * as yup from 'yup';
 
 import { Button } from '@/atoms/Button';
+import { PATH } from '@/constants/route';
 import { TextInput } from '@/molecules/TextInput';
 import { accountSchema } from '@/utils/schemas/rules';
 
-const registerSchema = accountSchema.pick([
+const signupSchema = accountSchema.pick([
   'email',
   'password',
   'confirmPassword',
   'username',
 ]);
 
-export type RegisterSchema = yup.InferType<typeof registerSchema>;
+export type SignupSchema = yup.InferType<typeof signupSchema>;
 
-interface RegisterFormProps {
-  onSubmit: (value: RegisterSchema) => void;
+interface SignupFormProps {
+  onSubmit: (value: SignupSchema) => void;
 }
-export const RegisterForm = (props: RegisterFormProps) => {
+
+export const SignupForm = (props: SignupFormProps) => {
   const { onSubmit } = props;
   const initialValues = {
     username: '',
@@ -33,16 +35,22 @@ export const RegisterForm = (props: RegisterFormProps) => {
       initialValues={initialValues}
       validateOnBlur={true}
       validateOnChange={false}
-      validationSchema={registerSchema}
+      validationSchema={signupSchema}
       onSubmit={onSubmit}
     >
       <Form className='h-full w-full'>
-        <Field name='userName' label='User Name' component={TextInput} />
+        <Field name='username' label='Username' component={TextInput} />
         <Field name='email' label='Email' component={TextInput} />
-        <Field name='password' label='Password' component={TextInput} />
+        <Field
+          name='password'
+          label='Password'
+          type='password'
+          component={TextInput}
+        />
         <Field
           name='confirmPassword'
           label='Confirm Password'
+          type='password'
           component={TextInput}
         />
 
@@ -50,8 +58,11 @@ export const RegisterForm = (props: RegisterFormProps) => {
           <Button title='Sign Up' type='submit' className='w-full' />
         </Center>
         <div className='mt-3 flex items-center justify-center text-xs'>
-          <span className='text-gray-600'>You already have account?</span>
-          <Link to='/login' className='text-green-8 ml-1'>
+          <span>Already have an account?</span>
+          <Link
+            to={`/${PATH.LOGIN_PAGE}`}
+            className='ml-1 text-malachite-500  no-underline hover:font-medium hover:text-malachite-600'
+          >
             Login
           </Link>
         </div>

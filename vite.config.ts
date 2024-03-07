@@ -3,8 +3,6 @@ import { resolve } from 'path';
 import react from '@vitejs/plugin-react';
 import { defineConfig, loadEnv } from 'vite';
 
-// https://vitejs.dev/config/
-
 const env = loadEnv('', process.cwd());
 
 const pathResolve = (dir: string) => resolve(__dirname, '.', dir);

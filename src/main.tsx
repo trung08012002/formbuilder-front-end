@@ -4,10 +4,10 @@ import { Provider as ReduxProvider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { MantineProvider } from '@mantine/core';
 
+import { store } from '@/redux/store.ts';
 import { Layout } from '@/templates/Layout/Layout.tsx';
 
-import { store } from './providers/redux/store.ts';
-import App from './App.tsx';
+import App from './App';
 
 import './index.css';
 

@@ -1,15 +1,16 @@
 import {
-  TextInput as TextInputMatine,
-  TextInputProps as TextInputMatineProps,
+  TextInput as TextInputMantine,
+  TextInputProps as TextInputMantineProps,
 } from '@mantine/core';
 import { FieldInputProps, FieldMetaProps } from 'formik';
 
 import { cn } from '@/utils/cn';
 
-interface TextInputProps extends Omit<TextInputMatineProps, 'form'> {
+interface TextInputProps extends Omit<TextInputMantineProps, 'form'> {
   classNameError?: string;
   classNameInput?: string;
   field: FieldInputProps<string>;
+  type: string;
   form: {
     touched: Record<string, boolean>;
     errors: Record<string, string>;
@@ -27,12 +28,9 @@ export const TextInput = (props: TextInputProps) => {
 
   return (
     <div className='flex flex-col'>
-      <TextInputMatine {...field} {...rest} />
+      <TextInputMantine {...field} {...rest} />
       <div
-        className={cn(
-          'mt-1 min-h-[1.25rem] text-sm text-red-600',
-          classNameError,
-        )}
+        className={cn('mt-1 min-h-[2rem] text-xs text-red-600', classNameError)}
       >
         {touched[field.name] && errors[field.name]}
       </div>

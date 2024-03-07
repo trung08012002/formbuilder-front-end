@@ -4,6 +4,7 @@ import { Field, Form, Formik } from 'formik';
 import * as yup from 'yup';
 
 import { Button } from '@/atoms/Button';
+import { PATH } from '@/constants/route';
 import { TextInput } from '@/molecules/TextInput';
 import { accountSchema } from '@/utils/schemas/rules';
 
@@ -33,14 +34,22 @@ export const LoginForm = (props: LoginFormProps) => {
       <Form className='h-full w-full'>
         <Field name='email' label='Email' component={TextInput} />
 
-        <Field name='password' label='Password' component={TextInput} />
+        <Field
+          name='password'
+          type='password'
+          label='Password'
+          component={TextInput}
+        />
 
         <Center>
           <Button title='Login' type='submit' className='w-full' />
         </Center>
         <div className='mt-3 flex items-center justify-center text-xs'>
-          <span className='text-gray-600'>You don't have account yet?</span>
-          <Link to='/register' className='text-green-8 ml-1'>
+          <span>Don't have an account?</span>
+          <Link
+            to={`/${PATH.SIGNUP_PAGE}`}
+            className='ml-1 text-malachite-500 no-underline hover:font-medium hover:text-malachite-600'
+          >
             Sign Up
           </Link>
         </div>

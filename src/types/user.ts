@@ -1,13 +1,15 @@
-import { SuccessResponse } from './utils';
+import { ErrorResponse, SuccessResponse } from './utils';
 
 export interface UserInfor {
   email: string;
   username: string;
   avatar: string;
 }
+
 export interface AuthResponse
   extends SuccessResponse<{
-    access_token: string;
-    refresh_token: string;
+    token: string;
     user: UserInfor;
   }> {}
+
+export interface AuthErrorResponse extends ErrorResponse<{ message: string }> {}
