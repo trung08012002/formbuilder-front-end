@@ -21,7 +21,7 @@ export const LoginPage = () => {
         return;
       }
       if (res.error as ErrorResponse)
-        toastify.displayError((res.error as ErrorResponse).message as string);
+        toastify.displayError((res.error as ErrorResponse).message);
     });
   };
 

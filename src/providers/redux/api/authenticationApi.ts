@@ -1,13 +1,13 @@
 import { API_URL } from '@/constants/apiURL';
 import { LoginSchema } from '@/organisms/LoginForm';
 import { SignupSchema } from '@/organisms/SignupForm';
-import { AuthResponse } from '@/types/auth';
+import { AuthResponse, SuccessResponse } from '@/types';
 
 import { rootApi } from './rootApi';
 
 export const authenticationApi = rootApi.injectEndpoints({
   endpoints: (build) => ({
-    loginUser: build.mutation<AuthResponse, LoginSchema>({
+    loginUser: build.mutation<SuccessResponse<AuthResponse>, LoginSchema>({
       query: (data: LoginSchema) => ({
         url: API_URL.LOGIN,
         method: 'POST',
@@ -15,7 +15,7 @@ export const authenticationApi = rootApi.injectEndpoints({
       }),
     }),
     signUpUser: build.mutation<
-      AuthResponse,
+      SuccessResponse<AuthResponse>,
       Omit<SignupSchema, 'confirmPassword'>
     >({
       query: (data: Omit<SignupSchema, 'confirmPassword'>) => ({

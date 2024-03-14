@@ -1,6 +1,7 @@
 import { Navigate, Outlet, useRoutes } from 'react-router-dom';
 
 import { PATH } from '@/constants/routes';
+import { AccountPage } from '@/pages/AccountPage';
 import { BuildFormPage } from '@/pages/BuildFormPage';
 import { LoginPage } from '@/pages/LoginPage';
 import { MyFormPage } from '@/pages/MyFormPage';
@@ -61,6 +62,10 @@ export function useRouteElements() {
         {
           path: PATH.BUILD_FORM_PAGE,
           element: <BuildFormPage />,
+        },
+        {
+          path: PATH.MY_ACCOUNT_PAGE,
+          element: <AccountPage />,
         },
       ],
     },

@@ -6,16 +6,9 @@ import * as yup from 'yup';
 import { Button } from '@/atoms/Button';
 import { PATH } from '@/constants/routes';
 import { TextInput } from '@/molecules/TextInput';
-import { accountSchema } from '@/utils/schemas/rules';
+import { signUpSchema } from '@/utils/schemas/signUpSchema';
 
-const signupSchema = accountSchema.pick([
-  'email',
-  'password',
-  'confirmPassword',
-  'username',
-]);
-
-export type SignupSchema = yup.InferType<typeof signupSchema>;
+export type SignupSchema = yup.InferType<typeof signUpSchema>;
 
 interface SignupFormProps {
   onSubmit: (value: SignupSchema) => void;
@@ -35,7 +28,7 @@ export const SignupForm = (props: SignupFormProps) => {
       initialValues={initialValues}
       validateOnBlur={true}
       validateOnChange={false}
-      validationSchema={signupSchema}
+      validationSchema={signUpSchema}
       onSubmit={onSubmit}
     >
       <Form className='h-full w-full'>

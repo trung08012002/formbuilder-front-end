@@ -5,4 +5,5 @@ export const PATH = {
   MY_FORM_PAGE: 'my-form-page',
   OVERVIEW_PAGE: 'overview',
   BUILD_FORM_PAGE: 'build',
+  MY_ACCOUNT_PAGE: 'my-account',
 };
