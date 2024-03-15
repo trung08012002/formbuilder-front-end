@@ -5,14 +5,7 @@ import { IoIosArrowDown } from 'react-icons/io';
 import { IoEye, IoTrash } from 'react-icons/io5';
 import { MdModeEditOutline } from 'react-icons/md';
 import { RiFolderAddFill, RiTeamFill } from 'react-icons/ri';
-import {
-  ActionIcon,
-  Anchor,
-  Group,
-  Menu,
-  Stack,
-  Text,
-} from '@mantine/core';
+import { ActionIcon, Anchor, Group, Menu, Stack, Text } from '@mantine/core';
 import { DataTable, DataTableColumn } from 'mantine-datatable';
 
 import { Button } from '@/atoms/Button';
