@@ -53,7 +53,7 @@ export const SignupForm = (props: SignupFormProps) => {
         <div className='mt-3 flex items-center justify-center text-xs'>
           <span>Already have an account?</span>
           <Link
-            to={`/${PATH.LOGIN_PAGE}`}
+            to={PATH.LOGIN_PAGE}
             className='ml-1 text-malachite-500  no-underline hover:font-medium hover:text-malachite-600'
           >
             Login

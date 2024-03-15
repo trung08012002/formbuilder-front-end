@@ -13,6 +13,7 @@ export const authenticationApi = rootApi.injectEndpoints({
         method: 'POST',
         data,
       }),
+      invalidatesTags: ['Profile', 'Forms'],
     }),
     signUpUser: build.mutation<
       SuccessResponse<AuthResponse>,

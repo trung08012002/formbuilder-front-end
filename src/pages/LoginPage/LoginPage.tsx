@@ -10,7 +10,9 @@ import { httpClient, saveAccessTokenToLS, toastify } from '@/utils';
 
 export const LoginPage = () => {
   const [loginUser, { isLoading }] = useLoginUserMutation();
+
   const navigate = useNavigate();
+
   const onSubmit = (values: LoginSchema) => {
     loginUser(values).then((res) => {
       if (isLoading) return;
