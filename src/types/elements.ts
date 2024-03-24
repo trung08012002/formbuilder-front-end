@@ -8,7 +8,7 @@ export interface HeadingConfig {
 export interface EmailConfig {
   fieldLabel: string;
   required: boolean;
-  subLabel: string[];
+  sublabel: string;
 }
 
 export type ElementConfig = HeadingConfig | EmailConfig;
