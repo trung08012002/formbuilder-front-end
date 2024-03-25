@@ -44,6 +44,10 @@ export interface BaseElement<T extends ElementType, U extends ElementConfig> {
   type: T;
   gridSize: GridSize;
   config: U;
+  fields: {
+    id: string;
+    name: string;
+  }[];
 }
 
 export type HeadingElement = BaseElement<ElementType.HEADING, HeadingConfig>;

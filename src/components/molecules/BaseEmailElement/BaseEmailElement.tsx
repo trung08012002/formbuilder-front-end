@@ -1,37 +1,26 @@
-import { Box, Group, Text, TextInput } from '@mantine/core';
+import { Box, Group, TextInput } from '@mantine/core';
 
-import { EmailConfig, EmailElement } from '@/types';
+import { EmailElement } from '@/types';
+import { cn } from '@/utils';
 
 import { BaseElementProps } from '../FactoryElement';
 
 export const BaseEmailElement = (props: BaseElementProps<EmailElement>) => {
-  const { item, updateItem, handleConfig } = props;
-
-  const handleChange =
-    (key: keyof EmailConfig) =>
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      handleConfig({
-        ...item.config,
-        [key]: event.currentTarget.value,
-      });
-      updateItem({
-        ...item,
-        config: {
-          ...item.config,
-          [key]: event.currentTarget.value,
-        },
-      });
-    };
+  const { item } = props;
 
   return (
     <Group>
       <Box className='w-full'>
-        <Text className='mb-2 text-base font-[500]'>
-          {item.config.fieldLabel}
-          {item.config.required && (
-            <span className='ml-2 text-lg text-red-500'>*</span>
-          )}
-        </Text>
+        <TextInput
+          label={item.config.fieldLabel || 'Type a question'}
+          withAsterisk={item.config.required}
+          classNames={{
+            input: 'hidden',
+            label: cn('mb-2 text-base font-[500]', {
+              'text-gray-400': item.config.fieldLabel.length === 0,
+            }),
+          }}
+        />
         <TextInput name='fieldLabel' required={item.config.required} readOnly />
         <TextInput
           autoComplete='off'
@@ -41,7 +30,7 @@ export const BaseEmailElement = (props: BaseElementProps<EmailElement>) => {
             input: 'text-xs font-thin text-slate-500',
           }}
           value={item.config.sublabel}
-          onChange={handleChange('sublabel')}
+          readOnly
         />
       </Box>
     </Group>
