@@ -134,7 +134,7 @@ export const ResponsiveGridLayout = ({
     setEdittingItem(createdItem);
   };
 
-  const handleDragStart = (layout: Layout[], currentItem: Layout) => {
+  const handleDragStart = (_layout: Layout[], currentItem: Layout) => {
     setIsDragging(true);
     setEdittingItem(elements.find((element) => element.id === currentItem.i));
   };
