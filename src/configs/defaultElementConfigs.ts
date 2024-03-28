@@ -31,7 +31,7 @@ export const defaultSubmitConfig: SubmitConfig = {
   buttonText: 'Submit',
   buttonColor: DEFAULT_BUTTON_COLOR,
   buttonAlignment: 'center',
-}
+};
 
 export const defaultTextConfig: TextConfig = {
   fieldLabel: 'Type a question',
