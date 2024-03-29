@@ -80,6 +80,7 @@ export const ActionToolbar = (props: ActionToolbarProps) => {
           <TextInputMantine
             placeholder='Search my forms...'
             size='md'
+            className='w-40'
             value={searchValue}
             onChange={(event) => handleOnChangeSearchInput(event)}
             leftSection={<CiSearch size={16} />}
