@@ -36,7 +36,7 @@ interface FolderListProps {
   modalType: ModalType | '';
   folderName: string;
   folderId: number;
-  teamId: number;
+  teamId?: number;
 }
 
 export const FolderList = ({
