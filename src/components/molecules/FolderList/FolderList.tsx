@@ -207,12 +207,12 @@ export const FolderList = ({
       />
       <ConfirmationModal
         body={
-          <Box className='flex flex-col items-center px-10'>
+          <Box className='flex flex-col items-center gap-2 px-10'>
             <MdOutlineWarning className='size-28 text-error' />
             <Text size='lg' className='font-bold'>
               Delete folders
             </Text>
-            <Text className='text-center'>
+            <Text className='text-sm'>
               Are you sure you want to delete selected folder? This folder and
               all sub-folders will be removed.
             </Text>
