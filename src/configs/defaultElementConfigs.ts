@@ -81,7 +81,7 @@ export const defaultSingleChoiceConfig: SingleChoiceConfig = {
     isDisplayed: false,
     text: 'Other',
   },
-}
+};
 
 export const defaultDatePickerConfig: DatePickerConfig = {
   fieldLabel: 'Date',
@@ -94,7 +94,7 @@ export const defaultMultipleChoiceConfig: MultipleChoiceConfig = {
   required: false,
   options: ['Type option 1', 'Type option 2', 'Type option 3', 'Type option 4'],
   otherOption: { isDisplayed: false, text: 'Other' },
-}
+};
 
 export const defaultNumberPhoneConfig: NumberPhoneConfig = {
   fieldLabel: 'Type your phone number',

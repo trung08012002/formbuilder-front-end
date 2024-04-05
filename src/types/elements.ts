@@ -65,7 +65,7 @@ export interface SingleChoiceConfig {
   otherOption: {
     isDisplayed: boolean;
     text: string;
-  }
+  };
 }
 
 export interface TimeInputConfig {

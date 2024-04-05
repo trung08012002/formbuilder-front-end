@@ -249,9 +249,9 @@ export const ResponsiveGridLayout = ({
             {
               id: uuidv4(),
               name: 'multipleChoice',
-            }
-          ]
-        }
+            },
+          ],
+        };
       case ElementType.PHONE:
         return {
           id: uid,
