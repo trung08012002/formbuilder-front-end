@@ -7,6 +7,7 @@ import {
   useDeleteMultipleResponsesMutation,
   useDeleteOneResponseMutation,
 } from '@/redux/api/responseApi';
+import { cn } from '@/utils';
 
 interface TopBarSubmission {
   formId: number;
@@ -49,11 +50,12 @@ export const TopBarSubmission = (props: TopBarSubmission) => {
     );
   };
 
-  if (selectedResponseIds.length === 0)
-    return <div className='h-[74px] w-full'></div>;
-
   return (
-    <div className='flex w-full items-center justify-between p-4'>
+    <div
+      className={cn('flex w-full items-center justify-between p-4', {
+        invisible: selectedResponseIds.length === 0,
+      })}
+    >
       <div className='flex items-center justify-between gap-3'>
         <Text className='text-[15px] text-gray-600'>
           {`Selected ${selectedResponseIds.length} ${selectedResponseIds.length === 1 ? 'record' : 'records'}`}
