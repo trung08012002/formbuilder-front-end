@@ -25,6 +25,13 @@ export const responseApi = rootApi.injectEndpoints({
         response.data,
       providesTags: ['Responses'],
     }),
+    exportResponses: build.mutation({
+      query: (formId: number) => ({
+        url: `${API_URL.RESPONSES}/export/${formId}`,
+        method: 'GET',
+        responseType: 'arraybuffer',
+      }),
+    }),
     createResponse: build.mutation<
       SuccessResponse<FormAnswerResponse>,
       {
@@ -75,4 +82,5 @@ export const {
   useCreateResponseMutation,
   useDeleteMultipleResponsesMutation,
   useDeleteOneResponseMutation,
+  useExportResponsesMutation,
 } = responseApi;

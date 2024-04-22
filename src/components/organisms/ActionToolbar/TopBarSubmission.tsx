@@ -1,13 +1,14 @@
 import { IoTrash } from 'react-icons/io5';
 import { Text } from '@mantine/core';
+import FileSaver from 'file-saver';
 
 import { Button } from '@/atoms/Button';
 import { ResponseRow } from '@/molecules/ResponsesTable';
 import {
   useDeleteMultipleResponsesMutation,
   useDeleteOneResponseMutation,
+  useExportResponsesMutation,
 } from '@/redux/api/responseApi';
-import { cn } from '@/utils';
 
 interface TopBarSubmission {
   formId: number;
@@ -33,6 +34,8 @@ export const TopBarSubmission = (props: TopBarSubmission) => {
 
   const [deleteOneResponse, { isLoading: isLoadingDeleteOneResponse }] =
     useDeleteOneResponseMutation();
+  const [exportResponsesMutation, { isLoading: isExportResponseLoading }] =
+    useExportResponsesMutation();
   const [
     deleteMultipleResponses,
     { isLoading: isLoadingDeleteMultipleResponse },
@@ -50,12 +53,30 @@ export const TopBarSubmission = (props: TopBarSubmission) => {
     );
   };
 
+  if (selectedResponseIds.length === 0)
+    return (
+      <div className='flex h-[74px] w-full items-center justify-end'>
+        <Button
+          loading={isExportResponseLoading}
+          className='mr-3 h-[36px]'
+          size='md'
+          onClick={() =>
+            exportResponsesMutation(formId).then((response) => {
+              if ('data' in response) {
+                const data = new Blob([response.data], {
+                  type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8',
+                });
+                return FileSaver.saveAs(data, `${Date.now().toString()}.xlsx`);
+              }
+            })
+          }
+          title='Export'
+        />
+      </div>
+    );
+
   return (
-    <div
-      className={cn('flex w-full items-center justify-between p-4', {
-        invisible: selectedResponseIds.length === 0,
-      })}
-    >
+    <div className='flex w-full items-center justify-between p-4'>
       <div className='flex items-center justify-between gap-3'>
         <Text className='text-[15px] text-gray-600'>
           {`Selected ${selectedResponseIds.length} ${selectedResponseIds.length === 1 ? 'record' : 'records'}`}
