@@ -10,4 +10,6 @@ export const API_URL = {
   UPLOAD_IMAGE: '/images/upload',
   ADD_TO_FOLDER: '/:formId/folder/:folderId/add',
   RESPONSES: 'responses',
+  OPEN_AI: 'open-ai',
+  GET_QUESTIONS: 'get-question',
 };
