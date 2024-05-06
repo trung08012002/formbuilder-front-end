@@ -10,6 +10,7 @@ import {
 } from 'react-icons/fa';
 import { FaChartSimple, FaLocationDot, FaStar, FaTable } from 'react-icons/fa6';
 import { IoMdCheckbox, IoMdRadioButtonOn } from 'react-icons/io';
+import { IconType } from 'react-icons/lib';
 import { MdEmail, MdInsertPageBreak, MdWatchLater } from 'react-icons/md';
 import { PiTextbox, PiTextboxBold } from 'react-icons/pi';
 import { RiNumber7 } from 'react-icons/ri';
@@ -130,32 +131,53 @@ export const ELEMENTS = {
   },
 };
 
-export const ElementList = [
+export interface ElementGroupType {
+  title: string;
+  elements: {
+    element: {
+      icon: IconType;
+      type: ElementType;
+      isDisabled: boolean;
+    };
+  }[];
+}
+
+export const ElementList: ElementGroupType[] = [
   {
-    title: 'Necessary elements',
+    title: 'Frequently used',
     elements: [
       { element: ELEMENTS.HEADING },
       { element: ELEMENTS.EMAIL },
       { element: ELEMENTS.FULLNAME },
       { element: ELEMENTS.ADDRESS },
       { element: ELEMENTS.PHONE },
-      { element: ELEMENTS.DATEPICKER },
     ],
   },
   {
-    title: 'Basic elements',
+    title: 'Display text',
     elements: [
       { element: ELEMENTS.SHORT_TEXT },
       { element: ELEMENTS.LONG_TEXT },
+    ],
+  },
+  {
+    title: 'Choices',
+    elements: [
       { element: ELEMENTS.DROPDOWN },
       { element: ELEMENTS.SINGLE_CHOICE },
       { element: ELEMENTS.MULTIPLE_CHOICE },
-      { element: ELEMENTS.TIME },
-      { element: ELEMENTS.SUBMIT },
     ],
+  },
+  {
+    title: 'Time',
+    elements: [{ element: ELEMENTS.TIME }, { element: ELEMENTS.DATEPICKER }],
   },
   {
     title: 'Survey elements',
     elements: [{ element: ELEMENTS.SCALE_RATING }],
+  },
+  {
+    title: 'Submit',
+    elements: [{ element: ELEMENTS.SUBMIT }],
   },
 ];

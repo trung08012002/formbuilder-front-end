@@ -22,3 +22,7 @@ export const isValidPhoneNumber = yup
   .string()
   .trim()
   .matches(RULES.PHONE_NUMBER_REGEX, 'Please enter a valid phone number.');
+
+export const requiredQuestionSchema = yup
+  .string()
+  .required(MESSAGES.REQUIRED_QUESTION);

@@ -1,4 +1,5 @@
 export const MESSAGES = {
+  REQUIRED_QUESTION: 'Provide a description of your questions first',
   REQUIRED_FIELD: 'This field is required',
   NO_EMPTY_FIELD: 'This field cannot be empty',
   NO_EMPTY_STRING: 'Must be contain at least 1 character',

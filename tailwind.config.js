@@ -31,14 +31,20 @@ export default {
           100: '#6F76A7',
           200: '#0A1551',
         },
+        mainPrimaryColorFilled: '#228be6',
+        lightMainPrimaryColorFilled: '#bbddff',
         blueButton: '#4170E2',
         toggleOn: '#92df2e',
         toggleOff: '#e8edee',
         activeTabBackground: '#8ad56c',
+        grayCustom: {
+          1: '#F9FAFB',
+        },
       },
       height: {
         headerHeight: '90px',
         contentHeight: `calc( 100vh - 70px)`,
+        mainHeight: `calc( 100vh - 120px)`,
       },
       boxShadow: {
         whiteShadow: '0 0 1px 2px rgba(225,225,225,0.5)',
