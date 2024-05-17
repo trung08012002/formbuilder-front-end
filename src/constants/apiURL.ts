@@ -12,4 +12,6 @@ export const API_URL = {
   RESPONSES: 'responses',
   OPEN_AI: 'open-ai',
   GET_QUESTIONS: 'get-question',
+  STATISTICS: 'statistics',
+  GET_DATE_DATE_STATISTIC: 'date',
 };

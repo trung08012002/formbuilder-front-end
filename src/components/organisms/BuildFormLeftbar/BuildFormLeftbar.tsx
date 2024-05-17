@@ -43,7 +43,7 @@ export const BuildFormLeftbar = ({
   const hasSubmitButton = elements.some(
     (element) => element.type === ElementType.SUBMIT,
   );
-  const [opened, { close, open }] = useDisclosure(false);
+  const [opened, { close, toggle }] = useDisclosure(false);
   const handleDrop = (elementType: ElementType) => {
     setCurrentElementType(elementType);
   };
@@ -102,7 +102,7 @@ export const BuildFormLeftbar = ({
           <Popover position='right' shadow='md' opened={opened}>
             <Popover.Target>
               <ActionIcon
-                onClick={open}
+                onClick={toggle}
                 className='bg-[#F3E8FF]'
                 styles={{
                   root: {
