@@ -4,6 +4,7 @@ export * from './dateTime';
 import * as toastify from './toastify';
 
 export * from './capitalize';
+export * from './charts';
 export * from './date';
 export * from './handleApiResponse';
 export * from './http';

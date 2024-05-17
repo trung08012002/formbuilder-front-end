@@ -18,6 +18,7 @@ import { NotFoundPage } from '@/pages/NotFoundPage';
 import { OverviewPage } from '@/pages/OverviewPage';
 import { PublicPage } from '@/pages/PublicPage';
 import { SignupPage } from '@/pages/SignupPage';
+import { StatisticPage } from '@/pages/StatisticPage';
 import { getAccessTokenFromLS } from '@/utils';
 
 const ResponsesPage = lazy(() => import('@/pages/ResponsesPage'));
@@ -126,6 +127,11 @@ export function useRouteElements() {
               element: <PreviewSection />,
             },
           ],
+        },
+
+        {
+          path: PATH.STATISTIC_PAGE,
+          element: <StatisticPage />,
         },
         {
           path: PATH.MY_ACCOUNT_PAGE,

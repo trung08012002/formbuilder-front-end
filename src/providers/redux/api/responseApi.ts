@@ -1,5 +1,6 @@
 import { API_URL } from '@/constants';
 import { SuccessResponse } from '@/types';
+import { DataDateInColumn, DataInColumn } from '@/types/charts';
 import {
   FormAnswerRequest,
   FormAnswerResponse,
@@ -31,6 +32,22 @@ export const responseApi = rootApi.injectEndpoints({
         method: 'GET',
         responseType: 'arraybuffer',
       }),
+    }),
+    getStatistic: build.query({
+      query: (formId: number) => ({
+        url: `${API_URL.RESPONSES}/${API_URL.STATISTICS}/${formId}`,
+        method: 'GET',
+      }),
+      transformResponse: (response: SuccessResponse<DataInColumn[]>) =>
+        response.data,
+    }),
+    getDateDataStatistic: build.query({
+      query: (formId: number) => ({
+        url: `${API_URL.RESPONSES}/${API_URL.STATISTICS}/${API_URL.GET_DATE_DATE_STATISTIC}/${formId}`,
+        method: 'GET',
+      }),
+      transformResponse: (response: SuccessResponse<DataDateInColumn[]>) =>
+        response.data,
     }),
     createResponse: build.mutation<
       SuccessResponse<FormAnswerResponse>,
@@ -78,6 +95,8 @@ export const responseApi = rootApi.injectEndpoints({
 });
 
 export const {
+  useGetDateDataStatisticQuery,
+  useGetStatisticQuery,
   useGetResponsesByFormIdQuery,
   useCreateResponseMutation,
   useDeleteMultipleResponsesMutation,
