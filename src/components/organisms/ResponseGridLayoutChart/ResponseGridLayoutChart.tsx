@@ -1,6 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Layout, Responsive, WidthProvider } from 'react-grid-layout';
 import { useParams } from 'react-router-dom';
+import generatePDF from 'react-to-pdf';
+import { useReactToPrint } from 'react-to-print';
 import { useClickOutside } from '@mantine/hooks';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -17,6 +19,7 @@ import {
 import { FactoryChart } from '@/molecules/FactoryChart/FactoryChart';
 import { ListDataChart } from '@/molecules/ListDataChart';
 import { RemoveItem } from '@/molecules/RemoveItem';
+import { SaveButton } from '@/molecules/SaveButton';
 import { ChartCustomType, ChartItem } from '@/types/charts';
 import { cn, getChartDefaultWidthHeight, randomColor } from '@/utils';
 
@@ -48,6 +51,7 @@ export const ResponsiveGridLayoutChart = ({
     xxs: Layout[];
   }>({ lg: [], md: [], sm: [], xs: [], xxs: [] });
   const [outSize, setOutSize] = useState(false);
+  const targetRef = useRef(null);
 
   function getLayout(element: ChartItem, layouts: Layout[]) {
     const foundlayout = layouts.find((layout) => element.id === layout.i);
@@ -312,7 +316,7 @@ export const ResponsiveGridLayoutChart = ({
     setEditingChart(
       chartElements.find((element) => element.id === currentItem.i),
     );
-    console.log('handleDragStart');
+
     setOutSize(false);
   };
 
@@ -336,64 +340,81 @@ export const ResponsiveGridLayoutChart = ({
       ref={ref}
       className='w-full rounded-md border border-solid border-slate-200 bg-white px-9 py-7'
     >
-      <ResponsiveReactGridLayout
-        className={cn('min-h-[200px]', {
-          'rounded-md border-2 border-dashed border-slate-300 bg-slate-100':
-            chartElements.length < 1,
-        })}
-        width={120}
-        cols={{ lg: 12, md: 12, sm: 12, xs: 12, xxs: 12 }}
-        rowHeight={30}
-        layouts={layouts}
-        onDrop={onDrop}
-        measureBeforeMount={false}
-        useCSSTransforms={mounted}
-        isResizable={true}
-        isDroppable={!isDisabled}
-        isDraggable={!isDisabled}
-        verticalCompact={false}
-        containerPadding={[0, 0]}
-        onDragStart={handleDragStart}
-        onDragStop={handleDragStop}
-        droppingItem={{
-          i: FLEETING_INDEX,
-          ...getChartDefaultWidthHeight(currentElementType),
+      <SaveButton
+        isLoading={false}
+        canSave={chartElements.length > 0}
+        handleSave={() => {
+          new Promise((resove) => {
+            setEditingChart(undefined);
+            resove('');
+          }).then(() => {
+            generatePDF(targetRef, {
+              filename: `${Date.now().toString()}.pdf`,
+            });
+          });
         }}
-      >
-        {chartElements.map((element) => (
-          <div
-            key={element.id}
-            data-grid={element.gridSize}
-            className={cn(
-              'flex w-full cursor-move flex-col justify-center rounded-md border-[3px] border-solid border-transparent bg-white px-2',
-              {
-                'react-draggable-dragging border-[3px] border-blue-500 !will-change-auto':
-                  element.id === editingChart?.id,
-              },
-            )}
-          >
-            <FactoryChart
-              chart={element}
-              isActive={element.id === editingChart?.id}
-            />
-            {element.id === editingChart?.id && (
-              <>
-                <ListDataChart
-                  chart={element}
-                  updateChartItems={updateItem}
-                  handleChangeData={handleChangeData}
-                  isActive={false}
-                  outSize={outSize}
-                  setOutSize={setOutSize}
-                  formId={Number.parseInt(formId!)}
-                />
+        className='right-5'
+      />
+      <div ref={targetRef}>
+        <ResponsiveReactGridLayout
+          className={cn('min-h-[200px]', {
+            'rounded-md border-2 border-dashed border-slate-300 bg-slate-100':
+              chartElements.length < 1,
+          })}
+          width={120}
+          cols={{ lg: 12, md: 12, sm: 12, xs: 12, xxs: 12 }}
+          rowHeight={30}
+          layouts={layouts}
+          onDrop={onDrop}
+          measureBeforeMount={false}
+          useCSSTransforms={mounted}
+          isResizable={true}
+          isDroppable={!isDisabled}
+          isDraggable={!isDisabled}
+          verticalCompact={false}
+          containerPadding={[0, 0]}
+          onDragStart={handleDragStart}
+          onDragStop={handleDragStop}
+          droppingItem={{
+            i: FLEETING_INDEX,
+            ...getChartDefaultWidthHeight(currentElementType),
+          }}
+        >
+          {chartElements.map((element) => (
+            <div
+              key={element.id}
+              data-grid={element.gridSize}
+              className={cn(
+                'flex w-full cursor-move flex-col justify-center rounded-md border-[3px] border-solid border-transparent bg-white px-2',
+                {
+                  'react-draggable-dragging border-[3px] border-blue-500 !will-change-auto':
+                    element.id === editingChart?.id,
+                },
+              )}
+            >
+              <FactoryChart
+                chart={element}
+                isActive={element.id === editingChart?.id}
+              />
+              {element.id === editingChart?.id && (
+                <>
+                  <ListDataChart
+                    chart={element}
+                    updateChartItems={updateItem}
+                    handleChangeData={handleChangeData}
+                    isActive={false}
+                    outSize={outSize}
+                    setOutSize={setOutSize}
+                    formId={Number.parseInt(formId!)}
+                  />
 
-                <RemoveItem removeItem={removeItem} id={editingChart.id} />
-              </>
-            )}
-          </div>
-        ))}
-      </ResponsiveReactGridLayout>
+                  <RemoveItem removeItem={removeItem} id={editingChart.id} />
+                </>
+              )}
+            </div>
+          ))}
+        </ResponsiveReactGridLayout>
+      </div>
     </div>
   );
 };
