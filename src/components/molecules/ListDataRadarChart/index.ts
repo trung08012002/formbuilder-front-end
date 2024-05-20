@@ -1,1 +1,1 @@
-export * from "./ListDataRadarChart"
+export * from './ListDataRadarChart';

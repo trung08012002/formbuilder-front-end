@@ -88,7 +88,7 @@ export const RadioGroup = (props: RadioGroupProps) => {
               optionValue={option}
             />
           ))}
-          {item.config.otherOption.isDisplayed && (
+          {item.config.otherOption && item.config.otherOption.isDisplayed && (
             <Field
               name={`${item.id}.otherOption.text`}
               validate={validateLabel}

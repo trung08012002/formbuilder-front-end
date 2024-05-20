@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react';
 import { Layout, Responsive, WidthProvider } from 'react-grid-layout';
 import { useParams } from 'react-router-dom';
 import generatePDF from 'react-to-pdf';
-import { useReactToPrint } from 'react-to-print';
 import { useClickOutside } from '@mantine/hooks';
 import { v4 as uuidv4 } from 'uuid';
 

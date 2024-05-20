@@ -157,7 +157,7 @@ export const createElement = (
       return {
         id: uid,
         type: ElementType.ADDRESS,
-        gridSize: { x: 0, y: 0, w: 12, h: 6 },
+        gridSize: { x: 0, y: 0, w: 12, h: 12 },
         config: { ...defaultAddressConfig, ...config },
         fields: [
           {
