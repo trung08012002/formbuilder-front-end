@@ -141,7 +141,7 @@ export const defaultSubmitHeightWidth = {
 };
 
 export const defaultAddressHeightWidth = {
-  h: 10,
+  h: 12,
   w: 12,
 };
 

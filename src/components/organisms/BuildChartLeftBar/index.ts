@@ -1,1 +1,1 @@
-export * from "./BuildChartLeftBar"
+export * from './BuildChartLeftBar';
