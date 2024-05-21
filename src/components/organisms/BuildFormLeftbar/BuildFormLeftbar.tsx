@@ -18,6 +18,7 @@ import { Field, Formik } from 'formik';
 
 import { ElementGroupType, ElementList } from '@/configs';
 import { useElementLayouts } from '@/contexts';
+import { ImportFromUrlButton } from '@/molecules/ImportFromUrlButton';
 import { QuestionFooter } from '@/molecules/QuestionFooter';
 import { Textarea } from '@/molecules/Textarea';
 import { useGetElementsFromQuestionMutation } from '@/redux/api/openAiApi';
@@ -78,154 +79,157 @@ export const BuildFormLeftbar = ({
   return (
     <div className='flex h-full flex-col justify-start overflow-auto pt-4'>
       <div className='z-10 -mb-[10px] flex items-center gap-2 border-b border-transparent bg-gray-50 px-3 pb-[10px] transition duration-200'>
-        <div className='relative w-full'>
-          <TextInput
-            value={searchValue}
-            onChange={handleOnChangeSearchValue}
-            placeholder='Search fields'
-            size='md'
-            leftSection={<CiSearch size={16} />}
-            rightSection={
-              <ActionIcon
-                variant='transparent'
-                size='lg'
-                className={cn('invisible text-gray-400 hover:text-gray-500', {
-                  visible: searchValue,
-                })}
-              >
-                <IoCloseOutline size={18} />
-              </ActionIcon>
-            }
-          />
-        </div>
-        <div>
-          <Popover position='right' shadow='md' opened={opened}>
-            <Popover.Target>
-              <ActionIcon
-                onClick={toggle}
-                className='bg-[#F3E8FF]'
-                styles={{
-                  root: {
-                    '--ai-hover': '#c2a1ef',
-                    '--ai-color': '#c2a1ef',
-                    '--ai-hover-color': '#f2e8ff',
-                  },
-                }}
-              >
-                <FaWandMagicSparkles style={{ color: '#A855F7' }} />
-              </ActionIcon>
-            </Popover.Target>
-            <Popover.Dropdown>
-              <Tabs defaultValue='One question'>
-                <Tabs.List>
-                  <Tabs.Tab value='One question'>One question</Tabs.Tab>
-                  <Tabs.Tab value='Multiple questions'>
-                    Multiple questions
-                  </Tabs.Tab>
-                </Tabs.List>
-                <Tabs.Panel value='One question'>
-                  <Formik
-                    initialValues={{ oneQuestion: '' }}
-                    onSubmit={(values) => {
-                      getElementsFromQuestion({
-                        questions: values.oneQuestion,
-                      }).then((elementsResponse) => {
-                        if ('data' in elementsResponse) {
-                          setElements([
-                            ...elements,
-                            ...elementsResponse.data.data.elements.map(
-                              (elementResponse) =>
-                                createElement(
-                                  elementResponse.elementType,
-                                  elementResponse.config,
-                                ) as unknown as ElementItem,
-                            ),
-                          ]);
-                          close();
-                        }
-                      });
+        <div className='flex flex-col gap-5'>
+          <div className='flex w-full items-center gap-2'>
+            <TextInput
+              value={searchValue}
+              onChange={handleOnChangeSearchValue}
+              placeholder='Search fields'
+              size='md'
+              leftSection={<CiSearch size={16} />}
+              rightSection={
+                <ActionIcon
+                  variant='transparent'
+                  size='lg'
+                  className={cn('invisible text-gray-400 hover:text-gray-500', {
+                    visible: searchValue,
+                  })}
+                >
+                  <IoCloseOutline size={18} />
+                </ActionIcon>
+              }
+            />
+            <div>
+              <Popover position='right' shadow='md' opened={opened}>
+                <Popover.Target>
+                  <ActionIcon
+                    onClick={toggle}
+                    className='bg-[#F3E8FF]'
+                    styles={{
+                      root: {
+                        '--ai-hover': '#c2a1ef',
+                        '--ai-color': '#c2a1ef',
+                        '--ai-hover-color': '#f2e8ff',
+                      },
                     }}
                   >
-                    {({ handleSubmit }) => (
-                      <form
-                        className='mt-5'
-                        onSubmit={(e) => {
-                          e.stopPropagation();
-                          handleSubmit(e);
+                    <FaWandMagicSparkles style={{ color: '#A855F7' }} />
+                  </ActionIcon>
+                </Popover.Target>
+                <Popover.Dropdown>
+                  <Tabs defaultValue='One question'>
+                    <Tabs.List>
+                      <Tabs.Tab value='One question'>One question</Tabs.Tab>
+                      <Tabs.Tab value='Multiple questions'>
+                        Multiple questions
+                      </Tabs.Tab>
+                    </Tabs.List>
+                    <Tabs.Panel value='One question'>
+                      <Formik
+                        initialValues={{ oneQuestion: '' }}
+                        onSubmit={(values) => {
+                          getElementsFromQuestion({
+                            questions: values.oneQuestion,
+                          }).then((elementsResponse) => {
+                            if ('data' in elementsResponse) {
+                              setElements([
+                                ...elements,
+                                ...elementsResponse.data.data.elements.map(
+                                  (elementResponse) =>
+                                    createElement(
+                                      elementResponse.elementType,
+                                      elementResponse.config,
+                                    ) as unknown as ElementItem,
+                                ),
+                              ]);
+                              close();
+                            }
+                          });
                         }}
                       >
-                        <Field
-                          readOnly={false}
-                          name='oneQuestion'
-                          classNameWrapper='w-full min-h-[124px]'
-                          validate={validateQuestion}
-                          placeholder='Describe the question you want to add with AI...'
-                          size='sm'
-                          component={Textarea}
-                          resize={'none'}
-                          classNames={{
-                            input:
-                              'max-h-[180px] min-h-[100px] overflow-y-auto',
-                          }}
-                        />
-                        <QuestionFooter />
-                      </form>
-                    )}
-                  </Formik>
-                </Tabs.Panel>
-                <Tabs.Panel value='Multiple questions'>
-                  <Formik
-                    initialValues={{ multipleQuestions: '' }}
-                    onSubmit={(values) => {
-                      getElementsFromQuestion({
-                        questions: values.multipleQuestions,
-                      }).then((elementsResponse) => {
-                        if ('data' in elementsResponse) {
-                          setElements([
-                            ...elements,
-                            ...elementsResponse.data.data.elements.map(
-                              (elementResponse) =>
-                                createElement(
-                                  elementResponse.elementType,
-                                  elementResponse.config,
-                                ) as unknown as ElementItem,
-                            ),
-                          ]);
-                        }
-                        close();
-                      });
-                    }}
-                  >
-                    {({ handleSubmit }) => (
-                      <form
-                        className='mt-5'
-                        onSubmit={(e) => {
-                          e.stopPropagation();
-                          handleSubmit(e);
+                        {({ handleSubmit }) => (
+                          <form
+                            className='mt-5'
+                            onSubmit={(e) => {
+                              e.stopPropagation();
+                              handleSubmit(e);
+                            }}
+                          >
+                            <Field
+                              readOnly={false}
+                              name='oneQuestion'
+                              classNameWrapper='w-full min-h-[124px]'
+                              validate={validateQuestion}
+                              placeholder='Describe the question you want to add with AI...'
+                              size='sm'
+                              component={Textarea}
+                              resize={'none'}
+                              classNames={{
+                                input:
+                                  'max-h-[180px] min-h-[100px] overflow-y-auto',
+                              }}
+                            />
+                            <QuestionFooter />
+                          </form>
+                        )}
+                      </Formik>
+                    </Tabs.Panel>
+                    <Tabs.Panel value='Multiple questions'>
+                      <Formik
+                        initialValues={{ multipleQuestions: '' }}
+                        onSubmit={(values) => {
+                          getElementsFromQuestion({
+                            questions: values.multipleQuestions,
+                          }).then((elementsResponse) => {
+                            if ('data' in elementsResponse) {
+                              setElements([
+                                ...elements,
+                                ...elementsResponse.data.data.elements.map(
+                                  (elementResponse) =>
+                                    createElement(
+                                      elementResponse.elementType,
+                                      elementResponse.config,
+                                    ) as unknown as ElementItem,
+                                ),
+                              ]);
+                            }
+                            close();
+                          });
                         }}
                       >
-                        <Field
-                          readOnly={false}
-                          name='multipleQuestions'
-                          classNameWrapper='w-full min-h-[124px]'
-                          placeholder='Describe the question you want to add with AI...'
-                          validate={validateQuestion}
-                          size='sm'
-                          component={Textarea}
-                          resize={'none'}
-                          classNames={{
-                            input:
-                              'max-h-[180px] min-h-[100px] overflow-y-auto',
-                          }}
-                        />
-                        <QuestionFooter />
-                      </form>
-                    )}
-                  </Formik>
-                </Tabs.Panel>
-              </Tabs>
-            </Popover.Dropdown>
-          </Popover>
+                        {({ handleSubmit }) => (
+                          <form
+                            className='mt-5'
+                            onSubmit={(e) => {
+                              e.stopPropagation();
+                              handleSubmit(e);
+                            }}
+                          >
+                            <Field
+                              readOnly={false}
+                              name='multipleQuestions'
+                              classNameWrapper='w-full min-h-[124px]'
+                              placeholder='Describe the question you want to add with AI...'
+                              validate={validateQuestion}
+                              size='sm'
+                              component={Textarea}
+                              resize={'none'}
+                              classNames={{
+                                input:
+                                  'max-h-[180px] min-h-[100px] overflow-y-auto',
+                              }}
+                            />
+                            <QuestionFooter />
+                          </form>
+                        )}
+                      </Formik>
+                    </Tabs.Panel>
+                  </Tabs>
+                </Popover.Dropdown>
+              </Popover>
+            </div>
+          </div>
+          <ImportFromUrlButton setElements={setElements} elements={elements} />
         </div>
       </div>
       <div className='flex h-full flex-col overflow-hidden overflow-y-scroll px-3 pb-6'>

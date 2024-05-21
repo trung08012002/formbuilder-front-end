@@ -2,6 +2,7 @@ import {
   requiredFieldValueSchema,
   requiredQuestionSchema,
   requiredStringSchema,
+  requiredUrl,
 } from './schemas/validation';
 
 export const validateLabel = async (value: string) =>
@@ -18,6 +19,12 @@ export const validateFieldValue = async (value: string) =>
 
 export const validateQuestion = async (value: string) =>
   await requiredQuestionSchema
+    .validate(value)
+    .then(() => {})
+    .catch((err) => err.errors[0]);
+
+export const validateUrl = async (value: string) =>
+  await requiredUrl
     .validate(value)
     .then(() => {})
     .catch((err) => err.errors[0]);

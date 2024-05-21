@@ -30,6 +30,16 @@ const formApi = rootApi.injectEndpoints({
         response.data,
       providesTags: (_result, _error, arg) => [{ type: 'Forms', id: arg.id }],
     }),
+    importGoogleForm: build.mutation<
+      SuccessResponse<FormResponse>,
+      { formUrl: string }
+    >({
+      query: ({ formUrl }) => ({
+        url: `${API_URL.FORMS}/${API_URL.IMPORT_GOOGLE_FORM}`,
+        method: 'POST',
+        data: { formUrl: formUrl },
+      }),
+    }),
     addToFavourites: build.mutation<SuccessResponse<unknown>, { id: number }>({
       query: ({ id }) => ({
         url: `${API_URL.FORMS}/${id}/favourites`,
@@ -161,6 +171,7 @@ export const {
   useGetMyFormsQuery,
   useGetFormDetailsQuery,
   useAddToFavouritesMutation,
+  useImportGoogleFormMutation,
   useDeleteFormMutation,
   useRestoreFormMutation,
   useCreateFormMutation,

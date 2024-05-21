@@ -3,11 +3,13 @@ import { FaWandMagicSparkles } from 'react-icons/fa6';
 import { Button, List, Text, UnstyledButton } from '@mantine/core';
 
 interface QuestionFooterProps {
+  actionName?: string;
   tips?: React.ReactNode;
 }
 
 export const QuestionFooter = (props: QuestionFooterProps) => {
   const {
+    actionName = 'Add Question',
     tips = (
       <div className='border border-mainPrimaryColorFilled bg-lightMainPrimaryColorFilled p-3 text-mainPrimaryColorFilled'>
         <Text>Let the AI know:</Text>
@@ -40,7 +42,7 @@ export const QuestionFooter = (props: QuestionFooterProps) => {
           </Text>
         </UnstyledButton>
         <Button leftSection={<FaWandMagicSparkles />} type='submit'>
-          Add question
+          {actionName}
         </Button>
       </div>
       {isShowsTips && (
