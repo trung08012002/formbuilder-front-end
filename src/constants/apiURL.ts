@@ -14,4 +14,5 @@ export const API_URL = {
   GET_QUESTIONS: 'get-question',
   STATISTICS: 'statistics',
   GET_DATE_DATE_STATISTIC: 'date',
+  IMPORT_GOOGLE_FORM: 'import',
 };

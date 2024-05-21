@@ -26,3 +26,5 @@ export const isValidPhoneNumber = yup
 export const requiredQuestionSchema = yup
   .string()
   .required(MESSAGES.REQUIRED_QUESTION);
+
+export const requiredUrl = yup.string().required(MESSAGES.REQUIRED_URL);
