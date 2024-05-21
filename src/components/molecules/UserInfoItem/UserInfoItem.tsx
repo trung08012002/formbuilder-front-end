@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { useTranslation } from 'react-i18next';
 import { CloseButton, Divider, Flex, Text } from '@mantine/core';
 import _startCase from 'lodash.startcase';
 
@@ -22,33 +23,36 @@ export const UserInfoItem = ({
   handleCancelEdit,
   hasEditButton,
   isLastItem,
-}: UserInfoItemProps) => (
-  <>
-    <Flex align='start' justify='space-between' gap='xl'>
-      <Text className='font-bold' flex={1.5}>
-        {_startCase(fieldName)}
-      </Text>
-      <Flex
-        align={editingFieldName === fieldName ? 'start' : 'center'}
-        justify='space-between'
-        flex={5}
-      >
-        {content}
-        {hasEditButton &&
-          (editingFieldName === fieldName ? (
-            <CloseButton
-              className='text-malachite-700 [&>svg]:!h-4 [&>svg]:!w-4'
-              onClick={handleCancelEdit}
-            />
-          ) : (
-            <Button
-              title='Edit'
-              variant='subtle'
-              onClick={() => handleEdit(fieldName)}
-            />
-          ))}
+}: UserInfoItemProps) => {
+  const { t } = useTranslation();
+  return (
+    <>
+      <Flex align='start' justify='space-between' gap='xl'>
+        <Text className='font-bold' flex={1.5}>
+          {_startCase(t(fieldName))}
+        </Text>
+        <Flex
+          align={editingFieldName === fieldName ? 'start' : 'center'}
+          justify='space-between'
+          flex={5}
+        >
+          {content}
+          {hasEditButton &&
+            (editingFieldName === fieldName ? (
+              <CloseButton
+                className='text-malachite-700 [&>svg]:!h-4 [&>svg]:!w-4'
+                onClick={handleCancelEdit}
+              />
+            ) : (
+              <Button
+                title={t('edit')}
+                variant='subtle'
+                onClick={() => handleEdit(fieldName)}
+              />
+            ))}
+        </Flex>
       </Flex>
-    </Flex>
-    {!isLastItem && <Divider className='my-3' />}
-  </>
-);
+      {!isLastItem && <Divider className='my-3' />}
+    </>
+  );
+};

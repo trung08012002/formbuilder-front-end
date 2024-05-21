@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { IoIosLogOut } from 'react-icons/io';
 import { IoPersonOutline } from 'react-icons/io5';
 import { MdOutlineModeEditOutline } from 'react-icons/md';
@@ -9,6 +10,7 @@ import GreenLogo from '@/assets/images/greenlogo.png';
 import { UserAvatar } from '@/atoms/UserAvatar';
 import { PATH } from '@/constants/routes';
 import { DEFAULT_FORM_TITLE, useBuildFormContext } from '@/contexts';
+import { Flags } from '@/molecules/Flags';
 import { Loader } from '@/molecules/Loader';
 import { useGetMyProfileQuery } from '@/redux/api/userApi';
 import { cn, formatDate, httpClient } from '@/utils';
@@ -26,6 +28,8 @@ export const BuildFormHeader = () => {
     currentTitle,
     setCurrentTitle,
   } = useBuildFormContext();
+
+  const { t } = useTranslation();
 
   const [isEditingTitle, setIsEditingTitle] = useState<boolean>(false);
 
@@ -112,8 +116,8 @@ export const BuildFormHeader = () => {
         <div className='text-[13px] text-malachite-500'>
           {isEditForm &&
             (form.updatedAt
-              ? `Last updated at ${updatedDate}`
-              : `Created at ${createdDate}`)}
+              ? t('lastUpdateAt', { updatedAt: createdDate })
+              : t('createdAt', { createdDate: updatedDate }))}
         </div>
       </div>
 
@@ -127,14 +131,12 @@ export const BuildFormHeader = () => {
             </Menu.Target>
             <Menu.Dropdown className='min-w-[230px]'>
               <Menu.Item className='p-3 font-medium text-gray-600 delay-100 ease-linear hover:bg-transparent'>
+                <Flags />
                 <Group>
                   <UserAvatar avatarUrl={myProfile.avatarUrl} />
-                  <div className='flex gap-1'>
-                    <span className='text-[14px] font-normal'>Hello,</span>
-                    <span className='text-[14px] font-medium'>
-                      {myProfile.username}
-                    </span>
-                  </div>
+                  <span className='text-[14px] font-medium'>
+                    {t('hello', { name: myProfile.username })}
+                  </span>
                 </Group>
               </Menu.Item>
               <Menu.Item
@@ -142,14 +144,14 @@ export const BuildFormHeader = () => {
                 className='gap-4 px-6 py-3 text-[15px] font-normal text-gray-600 delay-100 ease-linear hover:bg-malachite-50 hover:text-malachite-500'
                 onClick={() => navigate(PATH.MY_ACCOUNT_PAGE)}
               >
-                Account
+                {t('account')}
               </Menu.Item>
               <Menu.Item
                 leftSection={<IoIosLogOut size={16} />}
                 className='gap-4 px-6 py-3 text-[15px] font-normal text-gray-600 delay-100 ease-linear hover:bg-malachite-50 hover:text-malachite-500'
                 onClick={handleLogout}
               >
-                Logout
+                {t('logout')}
               </Menu.Item>
             </Menu.Dropdown>
           </Menu>

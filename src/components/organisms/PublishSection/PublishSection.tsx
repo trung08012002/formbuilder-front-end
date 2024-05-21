@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { FaLink } from 'react-icons/fa';
 import { FiLink } from 'react-icons/fi';
 import { useParams } from 'react-router-dom';
@@ -27,11 +28,14 @@ export const PublishSection = () => {
     { id: formId || '' },
     { skip: !formId },
   );
+
   const [updateDisabledStatus] = useUpdateDisabledStatusMutation();
 
   const { isEditForm } = useBuildFormContext();
 
   const [disabledForm, setDisabledForm] = useState<boolean>(false);
+
+  const { t } = useTranslation();
 
   const link = isEditForm ? `${window.location.origin}/form/${form?.id}` : '';
 
@@ -50,16 +54,16 @@ export const PublishSection = () => {
           </Box>
           <Stack className='gap-0'>
             <span className='text-base font-semibold text-blue-200'>
-              DIRECT LINK OF YOUR FORM
+              {t('directLink').toUpperCase()}
             </span>
             <span className='text-sm text-blue-100'>
-              Your form is securely published and ready to use at this address.
+              {t('useInThisAddress')}
             </span>
           </Stack>
         </Group>
         <Stack className='mt-4 gap-8 rounded border border-solid border-blue-50 bg-white px-6 py-8'>
           <span className='text-base font-semibold text-blue-200'>
-            SHARE WITH LINK
+            {t('shareWithLink').toUpperCase()}
           </span>
           <TextInput
             leftSection={<FiLink size={16} />}
@@ -76,14 +80,16 @@ export const PublishSection = () => {
               {({ copied, copy }) => (
                 <Button
                   onClick={copy}
-                  title={copied ? 'Copied to clipboard!' : 'COPY LINK'}
+                  title={
+                    copied ? t('copyToClipboard') : t('copyLink').toUpperCase()
+                  }
                   disabled={!isEditForm}
                 />
               )}
             </CopyButton>
             <Button
               className='bg-blueButton hover:bg-blueButton'
-              title='OPEN IN NEW TAB'
+              title={t('openInNewTab').toUpperCase()}
               onClick={() => {
                 window.open(link, '_blank');
               }}
@@ -94,14 +100,20 @@ export const PublishSection = () => {
           <Group className='items-center justify-between gap-2'>
             <Stack className='gap-[3px]'>
               <span className='text-base font-semibold uppercase text-blue-200'>
-                FORM STATUS
+                {t('formStatus')}
               </span>
               <span className='text-sm text-gray-500'>
-                {`Your form is currently ${disabledForm ? 'unable' : 'able'} to receive submissions`}
+                {disabledForm
+                  ? t('currentlyNotReceive')
+                  : t('currentlyReceive')}
               </span>
             </Stack>
             <ToggleButton
-              label={disabledForm ? 'DISABLED' : 'ENABLED'}
+              label={
+                disabledForm
+                  ? t('disable').toUpperCase()
+                  : t('enable').toUpperCase()
+              }
               labelClassName={
                 disabledForm
                   ? 'text-gray-500 text-xs'

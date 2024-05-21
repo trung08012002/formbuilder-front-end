@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { FaFolder, FaPlusCircle } from 'react-icons/fa';
 import { Box, NavLink, Text } from '@mantine/core';
 
@@ -42,6 +43,7 @@ export const FolderGroup = ({
     setActiveTeam,
     setSelectedRecords,
   } = useOverviewContext();
+  const { t } = useTranslation();
   const { setParams } = useFormParams();
 
   const openModal = (type: ModalType) => setModalType(type);
@@ -63,7 +65,7 @@ export const FolderGroup = ({
 
   return (
     <Box className='flex flex-col gap-2'>
-      <Text className='font-bold'>MY FORMS</Text>
+      <Text className='font-bold'>{t('myForms')}</Text>
       <NavLink
         className={cn('mt-3 rounded-md text-slate-600 hover:bg-slate-300', {
           'bg-slate-300': activeAllForms,
@@ -71,7 +73,7 @@ export const FolderGroup = ({
         classNames={{
           label: 'text-sm font-semibold',
         }}
-        label='All forms'
+        label={t('allForms')}
         leftSection={<FaFolder className='text-malachite-500' />}
         active={activeAllForms}
         onClick={() => {
@@ -102,7 +104,7 @@ export const FolderGroup = ({
           openModal(ModalTypes.CREATE_FOLDER);
           setFolderName('');
         }}
-        title='Create a new folder'
+        title={t('createANewFolder')}
       />
       <ManageFolderModal
         opened={modalType === ModalTypes.CREATE_FOLDER}

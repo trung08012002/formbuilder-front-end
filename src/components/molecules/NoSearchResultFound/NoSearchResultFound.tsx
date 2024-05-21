@@ -1,3 +1,4 @@
+import { Trans, useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { Box, Divider } from '@mantine/core';
 
@@ -10,11 +11,12 @@ export interface NoSearchResultFoundProps {
 export const NoSearchResultFound = (props: NoSearchResultFoundProps) => {
   const { search } = props;
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <div className='relative h-screen w-screen overflow-auto p-0'>
       <div className='border-gray-75 border-b px-2 pb-3 text-5xl text-gray-600 md:my-4'>
-        Search Results
+        {t('searchResults')}
       </div>
       <div className='-px-10 -mt-1'>
         <Divider my='md' />
@@ -29,11 +31,16 @@ export const NoSearchResultFound = (props: NoSearchResultFoundProps) => {
           alt='no result icon'
         />
         <h4 className='mb-4 mt-8 text-2xl font-medium uppercase text-gray-600'>
-          Oops, No Result Found
+          {t('noResultFound')}
         </h4>
         <p className='text-md mx-auto text-gray-600'>
-          Sorry we could not find any results for <b>{search}</b> in our Form
-          Templates.
+          <Trans
+            i18nKey='noFindAnyResults'
+            values={{
+              search: search,
+            }}
+            components={[<b />]}
+          />
         </p>
       </div>
 
@@ -52,17 +59,14 @@ export const NoSearchResultFound = (props: NoSearchResultFoundProps) => {
           alt='Create From Scratch Icon'
         />
         <div className='grow-1 flex flex-col items-center gap-4 text-center md:gap-1 lg:items-start lg:text-left lg:rtl:text-right'>
-          <p className='text-xl text-gray-800'>Make your own form in minutes</p>
-          <p className='text-sm text-gray-600'>
-            Create a custom form with Form Builder drag-and-drop builder. No
-            coding required!
-          </p>
+          <p className='text-xl text-gray-800'>{t('makeYourOwnForm')}</p>
+          <p className='text-sm text-gray-600'>{t('createACustomForm')}</p>
         </div>
         <button
           onClick={() => navigate(PATH.BUILD_FORM_PAGE)}
           className='color-white text-md xs:w-auto flex items-center justify-center rounded-lg border border-gray-700 bg-gray-300 px-3 py-3 text-center font-medium duration-200 hover:bg-white hover:text-gray-700 xl:px-10 xl:text-lg'
         >
-          Create Form From Scratch
+          {t('createFromScratch')}
         </button>
       </Box>
     </div>

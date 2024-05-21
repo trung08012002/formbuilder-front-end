@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import { MdDelete, MdEdit } from 'react-icons/md';
 import { PiDotsThreeOutlineVerticalFill } from 'react-icons/pi';
@@ -55,7 +56,7 @@ export const TeamList = ({
     setSelectedRecords,
   } = useOverviewContext();
   const openModal = (type: ModalType) => setModalType(type);
-
+  const { t } = useTranslation();
   const closeModal = () => setModalType('');
   const { setParams } = useFormParams();
   const [activeCollapse, setActiveCollapse] = useState<number[]>([]);
@@ -150,7 +151,7 @@ export const TeamList = ({
                         setTeamId(team.id);
                       }}
                     >
-                      Manage members
+                      {t('manageMembers')}
                     </Menu.Item>
                     <Menu.Item
                       className='mb-1 font-medium text-gray-800 transition-all duration-75 ease-linear last-of-type:mb-0 hover:bg-malachite-400 hover:text-white'
@@ -160,7 +161,7 @@ export const TeamList = ({
                         setTeamId(team.id);
                       }}
                     >
-                      Add new folder
+                      {t('addFolderName')}
                     </Menu.Item>
                     <Menu.Item
                       className='mb-1 font-medium text-gray-800 transition-all duration-75 ease-linear last-of-type:mb-0 hover:bg-malachite-400 hover:text-white'
@@ -171,7 +172,7 @@ export const TeamList = ({
                         setTeamId(team.id);
                       }}
                     >
-                      Change name
+                      {t('changeName')}
                     </Menu.Item>
                     <Menu.Item
                       className='mb-1 font-medium text-gray-800 transition-all duration-75 ease-linear last-of-type:mb-0 hover:bg-malachite-400 hover:text-white'
@@ -181,7 +182,7 @@ export const TeamList = ({
                         setTeamId(team.id);
                       }}
                     >
-                      Delete
+                      {t('delete')}
                     </Menu.Item>
                   </Menu.Dropdown>
                 </Menu>

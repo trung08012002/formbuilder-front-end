@@ -171,7 +171,9 @@ export function useRouteElements() {
           path: PATH.TEMPLATES_PAGE,
           element: (
             <ElementLayoutProvider>
-              <TemplatesPage />
+              <Suspense fallback={<LoadingPage />}>
+                <TemplatesPage />
+              </Suspense>
             </ElementLayoutProvider>
           ),
         },

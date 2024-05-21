@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { BsDatabaseExclamation } from 'react-icons/bs';
 import { useParams } from 'react-router-dom';
 import { Box } from '@mantine/core';
@@ -18,7 +19,7 @@ export const ResponsesPage = () => {
     formId: Number(formId),
     ...params,
   });
-
+  const { t } = useTranslation();
   const rawRecords = response?.responses;
 
   const responseRows: ResponseRow[] | undefined = useMemo(
@@ -72,7 +73,9 @@ export const ResponsesPage = () => {
         <Header />
         <Box className='flex h-contentHeight w-full flex-col items-center justify-center gap-3 bg-malachite-100 pt-10'>
           <BsDatabaseExclamation size={64} className='text-gray-500' />
-          <span className='mb-8 text-lg text-gray-600'>No records found.</span>
+          <span className='mb-8 text-lg text-gray-600'>
+            {t('noRecordsFound')}.
+          </span>
         </Box>
       </Box>
     );

@@ -1,4 +1,5 @@
 import { ChangeEvent, forwardRef, useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { IoIosAdd } from 'react-icons/io';
 import { IoClose } from 'react-icons/io5';
 import { useLocation } from 'react-router-dom';
@@ -38,6 +39,8 @@ export const TemplateContainer = forwardRef<
     useBuildFormContext();
 
   const logoInputRef = useRef<HTMLInputElement>(null);
+
+  const { t } = useTranslation();
 
   const { elements, setElements, edittingItem, setEdittingItem } =
     useElementLayouts();
@@ -163,7 +166,7 @@ export const TemplateContainer = forwardRef<
                   className='hidden'
                 />
                 <Button
-                  title='Add your logo'
+                  title={t('addYourLogo')}
                   variant='subtle'
                   color='gray'
                   leftSection={<IoIosAdd size={16} />}

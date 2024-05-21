@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { Image, LoadingOverlay, Text } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
@@ -5,6 +6,7 @@ import { useDisclosure } from '@mantine/hooks';
 import { UnSignedHeader } from '@/atoms/UnsignedHeader';
 import { BIG_Z_INDEX } from '@/constants';
 import { PATH } from '@/constants/routes';
+import { Flags } from '@/molecules/Flags';
 import { SignupForm, SignupSchema } from '@/organisms/SignupForm';
 import { useSignUpUserMutation } from '@/redux/api/authenticationApi';
 import { ErrorResponse } from '@/types';
@@ -31,6 +33,7 @@ export const SignupPage = () => {
       }
     });
   };
+  const { t } = useTranslation();
 
   return (
     <div className='h-screen w-screen'>
@@ -40,11 +43,9 @@ export const SignupPage = () => {
       <div className='flex h-contentHeight flex-col justify-center gap-7'>
         <div className='flex flex-col justify-between gap-2 text-center'>
           <Text className='text-xl font-bold text-malachite-400'>
-            EASIEST ONLINE FORM BUILDER
+            {t('easiestOnlineFormBuilder').toUpperCase()}
           </Text>
-          <Text className='text-5xl font-bold'>
-            Powerful forms get it done.
-          </Text>
+          <Text className='text-5xl font-bold'>{t('powerFullForms')}</Text>
         </div>
         <div className='flex h-[405px] items-center justify-evenly'>
           <div className='mt-3'>
@@ -60,7 +61,10 @@ export const SignupPage = () => {
               overlayProps={{ radius: 'sm', blur: 2 }}
               loaderProps={{ color: 'green' }}
             />
-            <SignupForm onSubmit={onSubmit} />
+            <div className='flex flex-col gap-2'>
+              <SignupForm onSubmit={onSubmit} />
+              <Flags />
+            </div>
           </div>
           <div>
             <Image

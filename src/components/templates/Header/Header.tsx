@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { IoIosLogOut } from 'react-icons/io';
 import { IoPersonOutline } from 'react-icons/io5';
 import { Link, useNavigate } from 'react-router-dom';
@@ -6,6 +7,7 @@ import { Anchor, Group, Image, Menu } from '@mantine/core';
 import WhiteLogo from '@/assets/images/whitelogo.png';
 import { UserAvatar } from '@/atoms/UserAvatar';
 import { PATH } from '@/constants/routes';
+import { Flags } from '@/molecules/Flags';
 import { Loader } from '@/molecules/Loader';
 import { useGetMyProfileQuery } from '@/redux/api/userApi';
 import { httpClient } from '@/utils';
@@ -14,7 +16,7 @@ const LOGO_HEIGHT = 45;
 
 export const Header = () => {
   const { data: myProfile, isLoading } = useGetMyProfileQuery();
-
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -32,28 +34,26 @@ export const Header = () => {
       ) : (
         <div className='flex items-center gap-4'>
           <Link to={PATH.ROOT_PAGE} className='text-white no-underline'>
-            My Forms
+            {t('myForms')}
           </Link>
           <Link to={PATH.TEMPLATES_PAGE} className='text-white no-underline'>
-            Templates
+            {t('templates')}
           </Link>
           <Link to={PATH.CREATE_TEMPLATE} className='text-white no-underline'>
-            Create Template
+            {t('createTemplate')}
           </Link>
           <Menu shadow='sm' offset={5} position='bottom-end' withArrow>
             <Menu.Target>
               <UserAvatar avatarUrl={myProfile.avatarUrl ?? ''} />
             </Menu.Target>
             <Menu.Dropdown className='min-w-[230px]'>
+              <Flags />
               <Menu.Item className='p-3 font-medium text-gray-600 delay-100 ease-linear hover:bg-transparent'>
                 <Group>
                   <UserAvatar avatarUrl={myProfile.avatarUrl ?? ''} />
-                  <div className='flex gap-1'>
-                    <span className='text-[15px] font-normal'>Hello,</span>
-                    <span className='text-[15px] font-medium'>
-                      {myProfile.username}
-                    </span>
-                  </div>
+                  <span className='text-[15px] font-medium'>
+                    {t('hello', { name: myProfile.username })}
+                  </span>
                 </Group>
               </Menu.Item>
               <Menu.Item
@@ -61,14 +61,14 @@ export const Header = () => {
                 className='gap-4 px-6 py-3 text-[15px] font-normal text-gray-600 delay-100 ease-linear hover:bg-malachite-50 hover:text-malachite-500'
                 onClick={() => navigate(PATH.MY_ACCOUNT_PAGE)}
               >
-                Account
+                {t('account')}
               </Menu.Item>
               <Menu.Item
                 leftSection={<IoIosLogOut size={16} />}
                 className='gap-4 px-6 py-3 text-[15px] font-normal text-gray-600 delay-100 ease-linear hover:bg-malachite-50 hover:text-malachite-500'
                 onClick={handleLogout}
               >
-                Logout
+                {t('logout')}
               </Menu.Item>
             </Menu.Dropdown>
           </Menu>

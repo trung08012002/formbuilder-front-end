@@ -7,6 +7,8 @@ import { MantineProvider } from '@mantine/core';
 import { store } from '@/redux/store.ts';
 import { Layout } from '@/templates/Layout/Layout.tsx';
 
+import './i18n';
+
 import App from './App';
 
 import './index.css';

@@ -1,4 +1,5 @@
 import { ReactNode, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Box, Tabs as MantineTabs } from '@mantine/core';
 import _isEqual from 'lodash.isequal';
@@ -22,6 +23,8 @@ export const TopBarTemplate = (props: TopBarTemplateProps) => {
   const { listComponent } = props;
 
   const navigate = useNavigate();
+
+  const { t } = useTranslation();
 
   const { pathname } = useLocation();
 
@@ -74,7 +77,7 @@ export const TopBarTemplate = (props: TopBarTemplateProps) => {
                 value={tab.value}
                 className='h-full min-w-40 rounded-[0] px-8 text-lg text-white duration-150 hover:bg-activeTabBackground'
               >
-                {tab.title}
+                {t(tab.title)}
               </MantineTabs.Tab>
             ))}
           </MantineTabs.List>

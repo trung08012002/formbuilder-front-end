@@ -1,7 +1,9 @@
 import { useEffect, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { BsFileText } from 'react-icons/bs';
 import { FaFolder, FaStar } from 'react-icons/fa';
 import { FaPlayCircle } from 'react-icons/fa';
+import { FcStatistics } from 'react-icons/fc';
 import { IoIosArrowDown } from 'react-icons/io';
 import { IoEye, IoTrash } from 'react-icons/io5';
 import { MdDriveFileMoveRtl } from 'react-icons/md';
@@ -65,7 +67,7 @@ export const FormsTable = () => {
 
   const [addToFavouritesMutation, { isLoading: isAddingToFavourites }] =
     useAddToFavouritesMutation();
-
+  const { t } = useTranslation();
   const [deleteForm, { isLoading: isDeletingForm }] = useDeleteFormMutation();
 
   const [restoreForm, { isLoading: isRestoringForm }] =
@@ -179,14 +181,14 @@ export const FormsTable = () => {
   const moreOptions = useMemo(
     () => [
       {
-        text: 'View',
+        text: t('view'),
         icon: <IoEye size={18} />,
         handleClick: (record: FormResponse) => {
           navigate(`/form/${record.id}`);
         },
       },
       {
-        text: 'Add to Folder',
+        text: t('addToFolder'),
         icon: <RiFolderAddFill size={18} />,
         handleClick: (record: FormResponse) => {
           setSelectedRecords([record]);
@@ -194,7 +196,7 @@ export const FormsTable = () => {
         },
       },
       {
-        text: activeTeam === -1 ? 'Move to Team' : 'Move to My Forms',
+        text: activeTeam === -1 ? t('moveToTeam') : t('moveToMyForms'),
         icon: <RiTeamFill size={18} />,
         handleClick: (record: FormResponse) => {
           setSelectedRecords([record]);
@@ -206,21 +208,29 @@ export const FormsTable = () => {
         },
       },
       {
-        text: 'Disable',
+        text: t('disable'),
         icon: <PiPauseCircleFill size={18} />,
         handleClick: (record: FormResponse) =>
           handleUpdateFormStatus(record, 'disable'),
       },
       {
-        text: 'Enable',
+        text: t('enable'),
         icon: <FaPlayCircle size={18} />,
         handleClick: (record: FormResponse) =>
           handleUpdateFormStatus(record, 'enable'),
       },
       {
-        text: 'Delete',
+        text: t('delete'),
         icon: <IoTrash size={18} />,
         handleClick: (record: FormResponse) => handleDeleteForm(record),
+      },
+      {
+        text: t('statistic'),
+        icon: <FcStatistics size={18} />,
+        handleClick: (record: FormResponse) =>
+          navigate(
+            PATH.STATISTIC_PAGE.replace(':formId', record.id.toString()),
+          ),
       },
     ],
     [activeTeam],
@@ -238,7 +248,7 @@ export const FormsTable = () => {
                 ? 'text-yellow-500 hover:text-yellow-500'
                 : 'text-gray-300 hover:text-gray-300'
             }
-            aria-label='Favourites'
+            aria-label={t('favorites')}
             onClick={(e) => {
               e.stopPropagation();
               addToFavouritesMutation({ id: record.id });
@@ -256,7 +266,7 @@ export const FormsTable = () => {
               color='gray'
               arrowOffset={20}
               arrowSize={5}
-              label='This form is currently disabled'
+              label={t('disabledLabelForm')}
               withArrow
               position='top-start'
               className='text-xs text-white'
@@ -305,10 +315,10 @@ export const FormsTable = () => {
                   }}
                   className='text-sm font-medium text-gray-500 hover:text-malachite-500 hover:underline'
                 >
-                  {record.totalSubmissions} submissions.
+                  {record.totalSubmissions} {t('submissions')}.
                 </UnstyledButton>
                 <Text className='text-sm font-medium text-gray-500'>
-                  Created on {formatDate(record.createdAt, 'MMM D, YYYY')}
+                  {t('createdOn')} {formatDate(record.createdAt, 'MMM D, YYYY')}
                 </Text>
               </Group>
             </Stack>
@@ -320,10 +330,10 @@ export const FormsTable = () => {
         render: (record: FormResponse) =>
           record.deletedAt === null ? (
             <Button
-              title='Edit Form'
+              title={t('editForm')}
               variant='subtle'
               classNames={{
-                inner: 'w-20',
+                inner: 'w-30',
                 root: 'flex justify-center items-center',
               }}
               className='h-full w-full font-medium focus:font-bold'
@@ -333,10 +343,10 @@ export const FormsTable = () => {
             />
           ) : (
             <Button
-              title='Purge'
+              title={t('purge')}
               variant='subtle'
               classNames={{
-                inner: 'w-20',
+                inner: 'w-30',
                 root: 'flex justify-center items-center',
               }}
               className='h-full w-full font-medium focus:font-bold'
@@ -358,7 +368,7 @@ export const FormsTable = () => {
                   onClick={() => {
                     setSelectedRecords([record]);
                   }}
-                  title='More'
+                  title={t('more')}
                   variant='subtle'
                   rightSection={<IoIosArrowDown />}
                   classNames={{
@@ -372,7 +382,7 @@ export const FormsTable = () => {
               <Menu.Dropdown className='min-w-[200px] !bg-malachite-100'>
                 {record.disabled
                   ? moreOptions
-                      .filter((option) => option.text !== 'Disable')
+                      .filter((option) => option.text !== t('disable'))
                       .map((option, index) => (
                         <Menu.Item
                           key={index}
@@ -384,7 +394,7 @@ export const FormsTable = () => {
                         </Menu.Item>
                       ))
                   : moreOptions
-                      .filter((option) => option.text !== 'Enable')
+                      .filter((option) => option.text !== t('enable'))
                       .map((option, index) => (
                         <Menu.Item
                           key={index}
@@ -399,7 +409,7 @@ export const FormsTable = () => {
             </Menu>
           ) : (
             <Button
-              title='Restore'
+              title={t('restore')}
               variant='subtle'
               classNames={{
                 inner: 'w-20',
@@ -448,7 +458,7 @@ export const FormsTable = () => {
             return [...prev, clickedRecord];
           });
         }}
-        noRecordsText='No records found'
+        noRecordsText={t('noRecordsFound')}
         totalRecords={data?.totalForms}
         recordsPerPage={data?.pageSize ?? DEFAULT_PAGE_SIZE}
         page={currentPage}
@@ -461,7 +471,11 @@ export const FormsTable = () => {
         }}
         paginationSize='sm'
         paginationText={({ from, to, totalRecords }) =>
-          `Showing ${from} - ${to} of ${totalRecords}`
+          t('paginationText', {
+            from: from,
+            to: to,
+            totalRecords: totalRecords,
+          })
         }
         paginationActiveBackgroundColor='green'
         fetching={isFetching}
@@ -495,12 +509,9 @@ export const FormsTable = () => {
           <Box className='flex flex-col items-center gap-3 px-10 py-5'>
             <IoTrash size={70} className='text-error' />
             <Text size='lg' className='font-bold'>
-              Delete Form
+              {t('deleteForm')}
             </Text>
-            <Text className='text-center'>
-              This form and all of its submissions will be deleted permanently.
-              This operation cannot be undone.
-            </Text>
+            <Text className='text-center'>{t('deleteFormResult')}</Text>
           </Box>
         }
         opened={modalType === ModalTypes.DELETE_FORM_PERMANENTLY}
@@ -515,11 +526,9 @@ export const FormsTable = () => {
           <Box className='flex flex-col items-center gap-3 px-10 py-5'>
             <MdDriveFileMoveRtl size={70} className='text-malachite-500' />
             <Text size='lg' className='font-bold'>
-              Move to My Forms
+              {t('moveToMyForms')}
             </Text>
-            <Text className='text-center'>
-              The team members will no longer access this form.
-            </Text>
+            <Text className='text-center'>{t('moveToMyFormsTeamWarning')}</Text>
           </Box>
         }
         opened={modalType === ModalTypes.REMOVE_FROM_TEAM}
@@ -527,7 +536,7 @@ export const FormsTable = () => {
         onClickBack={closeModal}
         onClickConfirm={() => handleRemoveFromTeam(selectedRecords[0])}
         confirmButtonProps={{
-          title: 'Move Now',
+          title: t('moveNow'),
           className: 'bg-malachite-500 hover:bg-malachite-600',
         }}
         isLoading={isRemovingFromTeam}

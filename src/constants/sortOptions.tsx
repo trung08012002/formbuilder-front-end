@@ -18,37 +18,37 @@ export const sortOptionList: SortOption[] = [
   {
     field: 'title',
     sortDirection: SortDirection.ASC,
-    title: 'Title',
+    title: 'title',
     icon: <FaArrowUpShortWide />,
   },
   {
     field: 'title',
     sortDirection: SortDirection.DESC,
-    title: 'Title',
+    title: 'title',
     icon: <FaArrowDownShortWide />,
   },
   {
     field: 'createdAt',
     sortDirection: SortDirection.ASC,
-    title: 'Date created',
+    title: 'dateCreated',
     icon: <FaArrowUpShortWide />,
   },
   {
     field: 'createdAt',
     sortDirection: SortDirection.DESC,
-    title: 'Date created',
+    title: 'dateCreated',
     icon: <FaArrowDownShortWide />,
   },
   {
     field: 'updatedAt',
     sortDirection: SortDirection.ASC,
-    title: 'Last edit',
+    title: 'lastEdit',
     icon: <FaArrowUpShortWide />,
   },
   {
     field: 'updatedAt',
     sortDirection: SortDirection.DESC,
-    title: 'Last edit',
+    title: 'lastEdit',
     icon: <FaArrowDownShortWide />,
   },
 ];

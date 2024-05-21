@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { Trans } from 'react-i18next';
 import { MdKeyboardBackspace } from 'react-icons/md';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Tooltip, UnstyledButton } from '@mantine/core';
@@ -95,8 +96,10 @@ export const PublicPage = () => {
         <div className='flex h-fit w-[50%] flex-col justify-between gap-3 rounded-xl border-x-0 border-b-0 border-t-[25px] border-solid border-t-malachite-500 bg-white px-6 py-8 shadow-lg'>
           <h2 className='text-[32px]'>{formData?.title}</h2>
           <span className='leading-7'>
-            This form is no longer accepting submissions. <br></br> Try
-            contacting the owner of the form if you think this is a mistake.
+            <Trans
+              i18nKey='thisFormNoLongerAcceptingSubmissions'
+              components={[<br />]}
+            />
           </span>
           <img
             src={DisabledFormIcon}

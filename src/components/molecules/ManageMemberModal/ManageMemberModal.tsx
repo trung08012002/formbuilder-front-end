@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { FaPlusCircle } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
 import { RiTeamFill } from 'react-icons/ri';
@@ -52,17 +53,18 @@ export const ManageMemberModal = ({
   isLoading,
   ...props
 }: ManageMemberModalProps) => {
+  const { t } = useTranslation();
   const membersInTeam = getMembersInTeamWithOwnership(teamList, teamId) || [];
   return (
     <Modal
       {...props}
       headerIcon={<RiTeamFill className='text-white' />}
-      headerTitle='Manage members'
+      headerTitle={t('manageMembers').toUpperCase()}
       body={
         <>
           <Stack className='gap-4 pb-8 pt-8'>
             <Text className='font-bold' size='lg'>
-              TEAM MEMBERS
+              {t('teamMembers')}
             </Text>
             <Stack>
               {membersInTeam
@@ -91,7 +93,7 @@ export const ManageMemberModal = ({
                     <Group>
                       <Box className='rounded-[4px] bg-gray-200 p-2'>
                         <Text className='text-sm font-bold text-gray-600'>
-                          {member.isOwner ? 'Owner' : 'Member'}
+                          {member.isOwner ? t('owner') : t('member')}
                         </Text>
                       </Box>
                       {!member.isOwner && (
@@ -114,16 +116,16 @@ export const ManageMemberModal = ({
             validationSchema={emailSchema}
             onSubmit={handleInviteMember}
           >
-            <Form className='flex w-full justify-between'>
+            <Form className='flex w-full justify-between gap-2'>
               <Field
                 name='email'
-                placeholder='Type email'
+                placeholder={t('typeEmail')}
                 classNameWrapper='w-[75%]'
                 component={TextInput}
               />
               <Button
                 className='font-bold'
-                title='Invite member'
+                title={t('inviteMember')}
                 variant='outline'
                 color='gray'
                 type='submit'
