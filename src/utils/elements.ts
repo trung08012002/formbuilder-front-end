@@ -4,16 +4,19 @@ import {
   defaultAddressConfig,
   defaultAddressHeightWidth,
   defaultDatePickerConfig,
+  defaultDatePickerHeightWidth,
   defaultDropdownConfig,
   defaultDropdownHeightWidth,
   defaultEmailConfig,
   defaultFullnameConfig,
+  defaultFullNameHeightWidth,
   defaultHeadingConfig,
   defaultHeadingHeightWidth,
   defaultLongTextHeightWidth,
   defaultMultipleChoiceConfig,
   defaultMultipleChoiceHeightWidth,
   defaultNumberPhoneConfig,
+  defaultPhoneHeightWidth,
   defaultScaleRatingConfig,
   defaultScaleRatingHeightWidth,
   defaultShortTextHeightWidth,
@@ -90,7 +93,7 @@ export const createElement = (
       return {
         id: uid,
         type: ElementType.FULLNAME,
-        gridSize: { x: 0, y: 0, w: 12, h: 6 },
+        gridSize: { x: 0, y: 0, ...defaultFullNameHeightWidth },
         config: { ...defaultFullnameConfig, ...config },
         fields: [
           {
@@ -109,7 +112,7 @@ export const createElement = (
       return {
         id: uid,
         type: ElementType.SUBMIT,
-        gridSize: { x: 0, y: 0, w: 12, h: 6 },
+        gridSize: { x: 0, y: 0, ...defaultSubmitHeightWidth },
         config: { ...defaultSubmitConfig, ...config },
         fields: [],
       };
@@ -117,7 +120,7 @@ export const createElement = (
       return {
         id: uid,
         type: ElementType.SHORT_TEXT,
-        gridSize: { x: 0, y: 0, w: 12, h: 6 },
+        gridSize: { x: 0, y: 0, ...defaultShortTextHeightWidth },
         config: { ...defaultTextConfig, ...config },
         fields: [
           {
@@ -130,7 +133,7 @@ export const createElement = (
       return {
         id: uid,
         type: ElementType.LONG_TEXT,
-        gridSize: { x: 0, y: 0, w: 12, h: 6 },
+        gridSize: { x: 0, y: 0, ...defaultLongTextHeightWidth },
         config: { ...defaultTextConfig, ...config },
         fields: [
           {
@@ -143,7 +146,7 @@ export const createElement = (
       return {
         id: uid,
         type: ElementType.SCALE_RATING,
-        gridSize: { x: 0, y: 0, w: 12, h: 6 },
+        gridSize: { x: 0, y: 0, ...defaultScaleRatingHeightWidth },
         config: { ...defaultScaleRatingConfig, ...config },
         fields: [
           {
@@ -157,7 +160,7 @@ export const createElement = (
       return {
         id: uid,
         type: ElementType.ADDRESS,
-        gridSize: { x: 0, y: 0, w: 12, h: 12 },
+        gridSize: { x: 0, y: 0, ...defaultAddressHeightWidth },
         config: { ...defaultAddressConfig, ...config },
         fields: [
           {
@@ -182,7 +185,7 @@ export const createElement = (
       return {
         id: uid,
         type: ElementType.DROPDOWN,
-        gridSize: { x: 0, y: 0, w: 12, h: 6 },
+        gridSize: { x: 0, y: 0, ...defaultDropdownHeightWidth },
         config: { ...defaultDropdownConfig, ...config },
         fields: [
           {
@@ -195,7 +198,7 @@ export const createElement = (
       return {
         id: uid,
         type: ElementType.SINGLE_CHOICE,
-        gridSize: { x: 0, y: 0, w: 12, h: 6 },
+        gridSize: { x: 0, y: 0, ...defaultSingleChoiceHeightWidth },
         config: { ...defaultSingleChoiceConfig, ...config },
         fields: [
           {
@@ -208,7 +211,7 @@ export const createElement = (
       return {
         id: uid,
         type: ElementType.MULTIPLE_CHOICE,
-        gridSize: { x: 0, y: 0, w: 12, h: 6 },
+        gridSize: { x: 0, y: 0, ...defaultMultipleChoiceHeightWidth },
         config: { ...defaultMultipleChoiceConfig, ...config },
         fields: [
           {
@@ -221,7 +224,7 @@ export const createElement = (
       return {
         id: uid,
         type: ElementType.PHONE,
-        gridSize: { x: 0, y: 0, w: 12, h: 6 },
+        gridSize: { x: 0, y: 0, ...defaultPhoneHeightWidth },
         config: { ...defaultNumberPhoneConfig, ...config },
         fields: [
           {
@@ -234,7 +237,7 @@ export const createElement = (
       return {
         id: uid,
         type: ElementType.DATEPICKER,
-        gridSize: { x: 0, y: 0, w: 12, h: 6 },
+        gridSize: { x: 0, y: 0, ...defaultDatePickerHeightWidth },
         config: { ...defaultDatePickerConfig, ...config },
         fields: [
           {
@@ -247,7 +250,7 @@ export const createElement = (
       return {
         id: uid,
         type: ElementType.TIME,
-        gridSize: { x: 0, y: 0, w: 12, h: 6 },
+        gridSize: { x: 0, y: 0, ...defaultTimeHeightWidth },
         config: { ...defaultTimeInputConfig, ...config },
         fields: [
           {

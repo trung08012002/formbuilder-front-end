@@ -9,4 +9,5 @@ export const PATH = {
   STATISTIC_PAGE: '/statistic/:formId',
   PUBLIC_PAGE: '/form/:id',
   RESPONSE_PAGE: '/responses/:formId',
+  TEMPLATES_PAGE: '/templates',
 };

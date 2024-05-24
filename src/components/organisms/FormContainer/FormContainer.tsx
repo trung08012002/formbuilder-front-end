@@ -1,6 +1,7 @@
 import { ChangeEvent, useEffect, useRef } from 'react';
 import { IoIosAdd } from 'react-icons/io';
 import { IoClose } from 'react-icons/io5';
+import { useLocation } from 'react-router-dom';
 import {
   Box,
   CloseButton,
@@ -14,8 +15,10 @@ import {
 import { Button } from '@/atoms/Button';
 import { MESSAGES } from '@/constants/messages';
 import { useBuildFormContext, useElementLayouts } from '@/contexts';
+import { useGetTemplateDetailsMutation } from '@/redux/api/templateApi';
 import { ElementItem, ElementType } from '@/types';
 import { toastify } from '@/utils';
+import { createElement } from '@/utils/elements';
 
 import { PropertiesRightbar } from '../PropertiesRightbar';
 import { ResponsiveGridLayout } from '../ResponsiveGridLayout';
@@ -69,6 +72,28 @@ export const FormContainer = ({
     }
     event.target.value = '';
   };
+  const { state } = useLocation();
+
+  const [getTemplateDetails] = useGetTemplateDetailsMutation();
+  useEffect(() => {
+    if (!state?.templateId) return;
+    getTemplateDetails({
+      templateId: Number(state.templateId),
+    }).then((template) => {
+      if ('data' in template) {
+        setElements([
+          ...elements,
+          ...template.data.elements.map(
+            (elementResponse) =>
+              createElement(
+                elementResponse.type,
+                elementResponse.config,
+              ) as unknown as ElementItem,
+          ),
+        ]);
+      }
+    });
+  }, []);
 
   useEffect(() => {
     setCurrentLogo(initLogo);

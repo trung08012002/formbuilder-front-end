@@ -111,10 +111,21 @@ export const defaultTimeInputConfig: TimeInputConfig = {
   },
 };
 
+export const defaultFullNameHeightWidth = {
+  h: 6,
+  w: 12,
+};
+
 export const defaultShortTextHeightWidth = {
   h: 5,
   w: 12,
 };
+
+export const defaultDatePickerHeightWidth = {
+  h: 7,
+  w: 12,
+};
+
 export const defaultTimeHeightWidth = {
   h: 4,
   w: 12,
@@ -142,6 +153,11 @@ export const defaultSubmitHeightWidth = {
 
 export const defaultAddressHeightWidth = {
   h: 12,
+  w: 12,
+};
+
+export const defaultPhoneHeightWidth = {
+  h: 5,
   w: 12,
 };
 
