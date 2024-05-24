@@ -1,6 +1,6 @@
 import { IoIosLogOut } from 'react-icons/io';
 import { IoPersonOutline } from 'react-icons/io5';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Anchor, Group, Image, Menu } from '@mantine/core';
 
 import WhiteLogo from '@/assets/images/whitelogo.png';
@@ -30,7 +30,13 @@ export const Header = () => {
       {!myProfile || isLoading ? (
         <Loader color='white' />
       ) : (
-        <div>
+        <div className='flex items-center gap-4'>
+          <Link to={PATH.ROOT_PAGE} className='text-white no-underline'>
+            My Forms
+          </Link>
+          <Link to={PATH.TEMPLATES_PAGE} className='text-white no-underline'>
+            Templates
+          </Link>
           <Menu shadow='sm' offset={5} position='bottom-end' withArrow>
             <Menu.Target>
               <UserAvatar avatarUrl={myProfile.avatarUrl ?? ''} />

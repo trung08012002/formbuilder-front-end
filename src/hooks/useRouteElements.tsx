@@ -19,6 +19,7 @@ import { OverviewPage } from '@/pages/OverviewPage';
 import { PublicPage } from '@/pages/PublicPage';
 import { SignupPage } from '@/pages/SignupPage';
 import { StatisticPage } from '@/pages/StatisticPage';
+import { TemplatesPage } from '@/pages/TemplatesPage';
 import { getAccessTokenFromLS } from '@/utils';
 
 const ResponsesPage = lazy(() => import('@/pages/ResponsesPage'));
@@ -128,7 +129,14 @@ export function useRouteElements() {
             },
           ],
         },
-
+        {
+          path: PATH.TEMPLATES_PAGE,
+          element: (
+            <ElementLayoutProvider>
+              <TemplatesPage />
+            </ElementLayoutProvider>
+          ),
+        },
         {
           path: PATH.STATISTIC_PAGE,
           element: <StatisticPage />,

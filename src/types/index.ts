@@ -10,5 +10,6 @@ export * from './modalType';
 export * from './open-api';
 export * from './responses';
 export * from './team';
+export * from './templates';
 export * from './uploadImage';
 export * from './users';

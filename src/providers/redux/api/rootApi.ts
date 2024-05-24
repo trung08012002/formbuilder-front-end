@@ -5,5 +5,13 @@ import { axiosBaseQuery } from '@/redux/axiosBaseQuery';
 export const rootApi = createApi({
   baseQuery: axiosBaseQuery(),
   endpoints: () => ({}),
-  tagTypes: ['Profile', 'Forms', 'Folders', 'Teams', 'Responses', 'OpenAi'],
+  tagTypes: [
+    'Profile',
+    'Forms',
+    'Folders',
+    'Teams',
+    'Responses',
+    'OpenAi',
+    'Templates',
+  ],
 });
