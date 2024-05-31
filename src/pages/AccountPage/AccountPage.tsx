@@ -152,11 +152,11 @@ export const AccountPage = () => {
   ) => {
     event.preventDefault();
     if (selectedFile) {
-      uploadImage(selectedFile).then((res) => {
+      uploadImage([selectedFile]).then((res) => {
         if ('data' in res) {
           type === UploadImage.AVATAR
-            ? updateProfile({ avatarUrl: res.data.data.url })
-            : updateProfile({ organizationLogo: res.data.data.url });
+            ? updateProfile({ avatarUrl: res.data.data.urls[0] })
+            : updateProfile({ organizationLogo: res.data.data.urls[0] });
           handleCancelEdit();
           return;
         }

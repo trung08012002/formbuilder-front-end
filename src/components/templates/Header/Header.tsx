@@ -37,6 +37,9 @@ export const Header = () => {
           <Link to={PATH.TEMPLATES_PAGE} className='text-white no-underline'>
             Templates
           </Link>
+          <Link to={PATH.CREATE_TEMPLATE} className='text-white no-underline'>
+            Create Template
+          </Link>
           <Menu shadow='sm' offset={5} position='bottom-end' withArrow>
             <Menu.Target>
               <UserAvatar avatarUrl={myProfile.avatarUrl ?? ''} />

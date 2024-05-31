@@ -5,10 +5,10 @@ import { rootApi } from './rootApi';
 
 const imageApi = rootApi.injectEndpoints({
   endpoints: (build) => ({
-    uploadImage: build.mutation<SuccessResponse<UploadImageResponse>, File>({
-      query: (file) => {
+    uploadImage: build.mutation<SuccessResponse<UploadImageResponse>, File[]>({
+      query: (files) => {
         const payload = new FormData();
-        payload.append('image', file);
+        files.map((file) => payload.append('files', file));
         return {
           url: API_URL.UPLOAD_IMAGE,
           method: 'POST',

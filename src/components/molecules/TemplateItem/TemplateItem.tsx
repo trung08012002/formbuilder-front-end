@@ -96,7 +96,9 @@ export const TemplateItem = (props: TemplateItemProps) => {
         </Text>
       </div>
 
-      <p className='line-clamp-3 break-words text-slate-400'>{description}</p>
+      <p className='line-clamp-3 h-20 break-words text-slate-400'>
+        {description}
+      </p>
 
       <UnstyledButton
         onClick={() => setParams({ ...params, categoryId: category.id })}

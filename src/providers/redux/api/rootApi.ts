@@ -13,5 +13,6 @@ export const rootApi = createApi({
     'Responses',
     'OpenAi',
     'Templates',
+    'TemplateCategories',
   ],
 });

@@ -16,4 +16,5 @@ export const API_URL = {
   GET_DATE_DATE_STATISTIC: 'date',
   IMPORT_GOOGLE_FORM: 'import',
   TEMPLATES: 'templates',
+  TEMPLATES_CATEGORY: 'template-categories',
 };
