@@ -12,6 +12,7 @@ import { PreviewSection } from '@/organisms/PreviewSection';
 import { PublishSection } from '@/organisms/PublishSection';
 import { AccountPage } from '@/pages/AccountPage';
 import { BuildFormPage } from '@/pages/BuildFormPage';
+import { BuildTemplatePage } from '@/pages/BuildTemplatePage';
 import { LoadingPage } from '@/pages/LoadingPage';
 import { LoginPage } from '@/pages/LoginPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
@@ -97,6 +98,43 @@ export function useRouteElements() {
             },
             {
               path: 'publish/preview',
+              element: <PreviewSection />,
+            },
+          ],
+        },
+        {
+          path: PATH.CREATE_TEMPLATE,
+          element: (
+            <BuildFormContextProvider>
+              <ElementLayoutProvider>
+                <BuildTemplatePage />
+              </ElementLayoutProvider>
+            </BuildFormContextProvider>
+          ),
+          children: [
+            {
+              path: 'preview',
+              element: <PreviewSection />,
+            },
+            {
+              path: 'publish/preview',
+              element: <PreviewSection />,
+            },
+          ],
+        },
+        {
+          path: PATH.EDIT_TEMPLATE,
+          element: (
+            <BuildFormContextProvider>
+              <ElementLayoutProvider>
+                <BuildTemplatePage />
+              </ElementLayoutProvider>
+            </BuildFormContextProvider>
+          ),
+          children: [
+            { path: 'preview', element: <PreviewSection /> },
+            {
+              path: 'setting/preview',
               element: <PreviewSection />,
             },
           ],

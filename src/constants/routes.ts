@@ -10,4 +10,6 @@ export const PATH = {
   PUBLIC_PAGE: '/form/:id',
   RESPONSE_PAGE: '/responses/:formId',
   TEMPLATES_PAGE: '/templates',
+  CREATE_TEMPLATE: '/template',
+  EDIT_TEMPLATE: '/template/:id',
 };

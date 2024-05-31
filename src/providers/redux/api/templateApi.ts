@@ -3,9 +3,12 @@ import { API_URL } from '@/constants';
 
 import { rootApi } from './rootApi';
 import {
+  CreateTemplateRequest,
   GetTemplatesDetailsResponse,
   GetTemplatesParams,
   GetTemplatesResponse,
+  TemplateResponse,
+  UpdateTemplateRequest,
 } from '@/types/templates';
 import { SuccessResponse } from '@/types';
 
@@ -48,6 +51,28 @@ const templateApi = rootApi.injectEndpoints({
         response: SuccessResponse<GetTemplatesDetailsResponse>,
       ) => response.data,
     }),
+    createTemplate: build.mutation<
+      SuccessResponse<TemplateResponse>,
+      CreateTemplateRequest
+    >({
+      query: (data) => ({
+        url: `/${API_URL.TEMPLATES}`,
+        method: 'POST',
+        data,
+      }),
+      invalidatesTags: ['Templates'],
+    }),
+    updateTemplate: build.mutation<
+      SuccessResponse<TemplateResponse>,
+      { templateId: number; data: UpdateTemplateRequest }
+    >({
+      query: ({ templateId, data }) => ({
+        url: `/${API_URL.TEMPLATES}/${templateId}`,
+        method: 'PATCH',
+        data,
+      }),
+      invalidatesTags: ['Templates'],
+    }),
   }),
 });
 
@@ -55,4 +80,6 @@ export const {
   useGetTemplatesQuery,
   useGetTemplateDetailsMutation,
   useGetTemplateQueryDetailsQuery,
+  useCreateTemplateMutation,
+  useUpdateTemplateMutation,
 } = templateApi;

@@ -62,9 +62,9 @@ export const BuildSection = () => {
   const handleCreateForm = () => {
     const filteredForm = separateFields(form);
     if (currentLogoFile) {
-      return uploadImage(currentLogoFile).then((imgRes) => {
+      return uploadImage([currentLogoFile]).then((imgRes) => {
         if ('data' in imgRes) {
-          const logoUrl = imgRes.data.data.url;
+          const logoUrl = imgRes.data.data.urls[0];
 
           return createForm({
             ...filteredForm,
@@ -93,9 +93,9 @@ export const BuildSection = () => {
   const handleCreateFormInFolder = (folderId: number) => {
     const filteredForm = separateFields(form);
     if (currentLogoFile) {
-      return uploadImage(currentLogoFile).then((imgRes) => {
+      return uploadImage([currentLogoFile]).then((imgRes) => {
         if ('data' in imgRes) {
-          const logoUrl = imgRes.data.data.url;
+          const logoUrl = imgRes.data.data.urls[0];
 
           return createFormInFolder({
             folderId,
@@ -127,9 +127,9 @@ export const BuildSection = () => {
   const handleCreateFormInTeam = (teamId: number) => {
     const filteredForm = separateFields(form);
     if (currentLogoFile) {
-      return uploadImage(currentLogoFile).then((imgRes) => {
+      return uploadImage([currentLogoFile]).then((imgRes) => {
         if ('data' in imgRes) {
-          const logoUrl = imgRes.data.data.url;
+          const logoUrl = imgRes.data.data.urls[0];
 
           return createFormInTeam({
             teamId,
@@ -161,9 +161,9 @@ export const BuildSection = () => {
   const handleCreateFormInFolderOfTeam = (folderId: number, teamId: number) => {
     const filteredForm = separateFields(form);
     if (currentLogoFile) {
-      return uploadImage(currentLogoFile).then((imgRes) => {
+      return uploadImage([currentLogoFile]).then((imgRes) => {
         if ('data' in imgRes) {
-          const logoUrl = imgRes.data.data.url;
+          const logoUrl = imgRes.data.data.urls[0];
 
           return createFormInFolderOfTeam({
             folderId,
@@ -213,9 +213,9 @@ export const BuildSection = () => {
   const handleUpdateForm = (formId: number) => {
     const filteredForm = separateFields(form);
     if (currentLogoFile) {
-      return uploadImage(currentLogoFile).then((imgRes) => {
+      return uploadImage([currentLogoFile]).then((imgRes) => {
         if ('data' in imgRes) {
-          const logoUrl = imgRes.data.data.url;
+          const logoUrl = imgRes.data.data.urls[0];
 
           return updateForm({
             id: formId,

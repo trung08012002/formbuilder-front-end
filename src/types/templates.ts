@@ -39,3 +39,18 @@ export interface GetTemplatesDetailsResponse {
   logoUrl: string;
   settings: object;
 }
+
+export interface CreateTemplateRequest {
+  categoryId: number;
+  description: string;
+  imagePreviewUrl: string;
+  elements: ElementItem[];
+  title: string;
+  logoUrl: string;
+  settings: object;
+  disabled: boolean;
+}
+
+export interface TemplateResponse extends CreateTemplateRequest {}
+
+export type UpdateTemplateRequest = Partial<CreateTemplateRequest>;
