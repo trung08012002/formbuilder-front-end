@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { FaFolder } from 'react-icons/fa';
 import { IoIosWarning } from 'react-icons/io';
 import { MdDelete, MdEdit } from 'react-icons/md';
@@ -62,7 +63,7 @@ export const FolderList = ({
   } = useOverviewContext();
 
   const navigate = useNavigate();
-
+  const { t } = useTranslation();
   const { setParams } = useFormParams();
 
   const [updateFolder, { isLoading: isFolderUpdating }] =
@@ -162,7 +163,7 @@ export const FolderList = ({
                       })
                     }
                   >
-                    Add new form
+                    {t('addNewForm')}
                   </Menu.Item>
                   <Menu.Item
                     onClick={() => {
@@ -173,7 +174,7 @@ export const FolderList = ({
                     className='mb-1 font-medium text-gray-800 transition-all duration-75 ease-linear last-of-type:mb-0 hover:bg-malachite-400 hover:text-white'
                     leftSection={<MdEdit />}
                   >
-                    Change name
+                    {t('changeName')}
                   </Menu.Item>
                   <Menu.Item
                     className='mb-1 font-medium text-gray-800 transition-all duration-75 ease-linear last-of-type:mb-0 hover:bg-malachite-400 hover:text-white'
@@ -183,7 +184,7 @@ export const FolderList = ({
                       setFolderId(folder.id);
                     }}
                   >
-                    Delete
+                    {t('delete')}
                   </Menu.Item>
                 </Menu.Dropdown>
               </Menu>
@@ -207,12 +208,11 @@ export const FolderList = ({
           <Box className='flex flex-col items-center gap-3 px-10 py-5 text-center'>
             <IoIosWarning className='size-28 text-error' />
             <Text size='lg' className='font-bold'>
-              Delete folder
+              {t('deleteFolder')}
             </Text>
             <Text className='text-sm leading-6'>
-              Are you sure you want to delete this folder? <br />
-              This folder and all forms in the folder will be deleted
-              permanently.
+              {t('deleteFolderConfirm')} <br />
+              {t('deleteFolderResult')}
             </Text>
           </Box>
         }

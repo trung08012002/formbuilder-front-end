@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { CiSearch } from 'react-icons/ci';
 import { IoCloseOutline } from 'react-icons/io5';
 import { ActionIcon, TextInput as TextInputMantine } from '@mantine/core';
@@ -19,9 +20,16 @@ interface ActionToolbarProps {
 export const ActionToolbar = ({ selectedFormIds }: ActionToolbarProps) => {
   const { setParams, sortOptionIndex, setSortOptionIndex, setCurrentPage } =
     useFormParams();
-
+  const { t, i18n } = useTranslation();
   const [searchValue, setSearchValue] = useState<string>('');
-
+  const updatedTitleSortOptionList = useMemo(
+    () =>
+      sortOptionList.map((sortOption) => ({
+        ...sortOption,
+        title: t('sortItem', { context: sortOption.title }),
+      })),
+    [sortOptionList, i18n.language],
+  );
   const handleOnClick = (item: SortOption, index: number) => {
     setSortOptionIndex(index);
     setParams((prevState) => ({
@@ -81,16 +89,18 @@ export const ActionToolbar = ({ selectedFormIds }: ActionToolbarProps) => {
             buttonProps={{
               variant: 'outline',
               size: 'md',
-              title: sortOptionList[sortOptionIndex].title,
+              title: t('sortItem', {
+                context: sortOptionList[sortOptionIndex].title,
+              }),
               rightSection: sortOptionList[sortOptionIndex].icon,
               className: 'font-semibold text-[15px]',
             }}
-            itemList={sortOptionList}
+            itemList={updatedTitleSortOptionList}
             sortOptionIndex={sortOptionIndex}
             handleOnClick={handleOnClick}
           />
           <TextInputMantine
-            placeholder='Search my forms...'
+            placeholder={t('searchMyForm')}
             size='md'
             value={searchValue}
             onChange={(event) => handleOnChangeSearchInput(event)}

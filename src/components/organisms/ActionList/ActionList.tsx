@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { FaFolderPlus, FaTableCells } from 'react-icons/fa6';
 import { IoTrash } from 'react-icons/io5';
 import { MdDriveFileMoveRtl } from 'react-icons/md';
@@ -28,7 +29,7 @@ interface ActionListFormProps {
 
 export const ActionList = ({ selectedFormIds }: ActionListFormProps) => {
   const navigate = useNavigate();
-
+  const { t } = useTranslation();
   const { activeTeam, selectedRecords, setSelectedRecords } =
     useOverviewContext();
 
@@ -104,19 +105,19 @@ export const ActionList = ({ selectedFormIds }: ActionListFormProps) => {
   const SingleFormActions = [
     {
       icon: <FaTableCells size={24} />,
-      title: 'Submissions',
+      title: t('submissions'),
       onClick: handleViewSubmissions,
     },
     {
       icon: <FaFolderPlus size={24} />,
-      title: 'Add to Folder',
+      title: t('addToFolder'),
       onClick: () => {
         openModal(ModalTypes.ADD_TO_FOLDER);
       },
     },
     {
       icon: <RiTeamFill size={24} />,
-      title: activeTeam === -1 ? 'Move to Team' : 'Move to My Forms',
+      title: activeTeam === -1 ? t('moveToTeam') : t('moveToMyForms'),
       onClick: () => {
         if (activeTeam === -1) {
           openModal(ModalTypes.MOVE_TO_TEAM);
@@ -127,7 +128,7 @@ export const ActionList = ({ selectedFormIds }: ActionListFormProps) => {
     },
     {
       icon: <IoTrash size={24} />,
-      title: 'Delete',
+      title: t('delete'),
       onClick: handleDeleteMultipleForms,
     },
   ];
@@ -135,14 +136,14 @@ export const ActionList = ({ selectedFormIds }: ActionListFormProps) => {
   const MultipleFormActions = [
     {
       icon: <FaFolderPlus size={24} />,
-      title: 'Add to folder',
+      title: t('addToFolder'),
       onClick: () => {
         openModal(ModalTypes.ADD_TO_FOLDER);
       },
     },
     {
       icon: <RiTeamFill size={24} />,
-      title: activeTeam === -1 ? 'Move to Team' : 'Move to My Forms',
+      title: activeTeam === -1 ? t('moveToTeam') : t('moveToMyForms'),
       onClick: () => {
         if (activeTeam === -1) {
           openModal(ModalTypes.MOVE_TO_TEAM);
@@ -153,7 +154,7 @@ export const ActionList = ({ selectedFormIds }: ActionListFormProps) => {
     },
     {
       icon: <IoTrash size={24} />,
-      title: 'Delete',
+      title: t('delete'),
       onClick: handleDeleteMultipleForms,
     },
   ];
@@ -161,14 +162,14 @@ export const ActionList = ({ selectedFormIds }: ActionListFormProps) => {
   const FormInTrashActions = [
     {
       icon: <IoTrash size={24} />,
-      title: 'Purge',
+      title: t('purge'),
       onClick: () => {
         openModal(ModalTypes.DELETE_FORM_PERMANENTLY);
       },
     },
     {
       icon: <TbRestore size={24} />,
-      title: 'Restore',
+      title: t('restore'),
       onClick: handleRestoreMultipleForms,
     },
   ];
@@ -194,7 +195,7 @@ export const ActionList = ({ selectedFormIds }: ActionListFormProps) => {
           key={index}
           variant='outline'
           color={
-            action.title === 'Delete' || action.title === 'Purge'
+            action.title === t('delete') || action.title === t('purge')
               ? 'error'
               : 'primary'
           }
@@ -222,12 +223,9 @@ export const ActionList = ({ selectedFormIds }: ActionListFormProps) => {
           <Box className='flex flex-col items-center gap-3 px-10 py-5'>
             <IoTrash size={70} className='text-error' />
             <Text size='lg' className='font-bold'>
-              Delete Form
+              {t('deleteForm')}
             </Text>
-            <Text className='text-center'>
-              Selected form(s) and all of its submissions will be deleted
-              permanently. This operation cannot be undone.
-            </Text>
+            <Text className='text-center'>{t('selectedDeleteFormResult')}</Text>
           </Box>
         }
         opened={modalType === ModalTypes.DELETE_FORM_PERMANENTLY}
@@ -242,11 +240,9 @@ export const ActionList = ({ selectedFormIds }: ActionListFormProps) => {
           <Box className='flex flex-col items-center gap-3 px-10 py-5'>
             <MdDriveFileMoveRtl size={70} className='text-blue-500' />
             <Text size='lg' className='font-bold'>
-              Move to My Forms
+              {t('moveToMyForms')}
             </Text>
-            <Text className='text-center'>
-              The team members will no longer access selected form(s).
-            </Text>
+            <Text className='text-center'>{t('moveToMyFormsTeamWarning')}</Text>
           </Box>
         }
         opened={modalType === ModalTypes.REMOVE_FROM_TEAM}
@@ -254,7 +250,7 @@ export const ActionList = ({ selectedFormIds }: ActionListFormProps) => {
         onClickBack={closeModal}
         onClickConfirm={handleRemoveMultipleFormsFromTeam}
         confirmButtonProps={{
-          title: 'Move Now',
+          title: t('moveNow'),
           className: 'bg-blue-500 hover:bg-blue-600',
         }}
         isLoading={isRemovingFromTeam}

@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { Center } from '@mantine/core';
 import { Field, Form, Formik } from 'formik';
@@ -23,6 +24,7 @@ export const SignupForm = (props: SignupFormProps) => {
     password: '',
     confirmPassword: '',
   };
+  const { t } = useTranslation();
 
   return (
     <Formik
@@ -36,21 +38,21 @@ export const SignupForm = (props: SignupFormProps) => {
         <Field
           classNameWrapper='mb-2'
           name='username'
-          label='Username'
+          label={t('username')}
           size='xs'
           component={TextInput}
         />
         <Field
           classNameWrapper='mb-2'
           name='email'
-          label='Email'
+          label={t('email')}
           size='xs'
           component={TextInput}
         />
         <Field
           classNameWrapper='mb-2'
           name='password'
-          label='Password'
+          label={t('password')}
           type='password'
           size='xs'
           component={PasswordInput}
@@ -58,22 +60,22 @@ export const SignupForm = (props: SignupFormProps) => {
         <Field
           classNameWrapper='mb-2'
           name='confirmPassword'
-          label='Confirm Password'
+          label={t('confirmPassword')}
           type='password'
           size='xs'
           component={PasswordInput}
         />
 
         <Center className='py-2'>
-          <Button title='Sign Up' type='submit' className='w-full' />
+          <Button title={t('signUp')} type='submit' className='w-full' />
         </Center>
         <div className='mt-3 flex items-center justify-center text-xs'>
-          <span>Already have an account?</span>
+          <span>{t('haveAccount')}</span>
           <Link
             to={PATH.LOGIN_PAGE}
             className='ml-1 text-malachite-500  no-underline hover:font-medium hover:text-malachite-600'
           >
-            Login
+            {t('login')}
           </Link>
         </div>
       </Form>

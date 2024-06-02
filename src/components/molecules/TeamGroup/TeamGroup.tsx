@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { FaPlusCircle } from 'react-icons/fa';
 import { IoIosWarning } from 'react-icons/io';
 import { Box, Text } from '@mantine/core';
@@ -38,7 +39,7 @@ export const TeamGroup = ({
   const [teamName, setTeamName] = useState<string>('');
   const [teamId, setTeamId] = useState<number>(0);
   const [modalType, setModalType] = useState<ModalType | ''>('');
-
+  const { t } = useTranslation();
   const [addMember, { isLoading: isAddMemberLoading }] = useAddMemberMutation();
   const [removeMember, { isLoading: isRemoveMemberLoading }] =
     useRemoveMemberMutation();
@@ -130,7 +131,7 @@ export const TeamGroup = ({
 
   return (
     <div className='flex flex-col gap-2'>
-      <Text className='mb-3 font-bold'>MY TEAMS</Text>
+      <Text className='mb-3 font-bold'>{t('myTeams')}</Text>
       <TeamList
         modalType={modalType}
         setModalType={setModalType}
@@ -152,7 +153,7 @@ export const TeamGroup = ({
         justify='flex-start'
         variant='subtle'
         leftSection={<FaPlusCircle className='size-4' />}
-        title='Create a new team'
+        title={t('createANewTeam')}
       />
       <ManageMemberModal
         teamList={teamList}
@@ -194,11 +195,11 @@ export const TeamGroup = ({
           <Box className='flex flex-col items-center gap-3 px-10 py-5 text-center'>
             <IoIosWarning className='size-28 text-error' />
             <Text size='lg' className='font-bold'>
-              Delete team
+              {t('deleteTeam')}
             </Text>
             <Text className='text-sm leading-6'>
-              Are you sure you want to delete this team? <br /> This team and
-              all assets in the team will be deleted permanently.
+              {t('deleteTeamConfirm')} <br />
+              {t('deleteTeamResult')}
             </Text>
           </Box>
         }

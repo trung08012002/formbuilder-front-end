@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { RiTeamFill } from 'react-icons/ri';
 import {
   Box,
@@ -27,7 +28,7 @@ export const MoveToTeamModal = ({
   ...props
 }: MoveToTeamModalProps) => {
   const { selectedRecords, setSelectedRecords } = useOverviewContext();
-
+  const { t } = useTranslation();
   const disabledTeamOptions = selectedRecords.map(
     (form) => form.teamId && form.teamId.toString(),
   );
@@ -49,7 +50,9 @@ export const MoveToTeamModal = ({
         toastify.displaySuccess(MESSAGES.MOVE_FORM_TO_TEAM_SUCCESS);
         closeModal();
       } else if (errorCount > 0) {
-        toastify.displayError(`${errorCount} form(s) failed to move to team`);
+        toastify.displayError(
+          t('errorFormFailedToMoveToTeam', { errorCount: errorCount }),
+        );
       }
       setSelectedRecords([]);
     });
@@ -59,7 +62,7 @@ export const MoveToTeamModal = ({
     <Modal
       {...props}
       headerIcon={<RiTeamFill className='text-white' />}
-      headerTitle='Move to team'
+      headerTitle={t('moveToTeam')}
       body={
         <Box className='px-3 py-8'>
           <Radio.Group
@@ -68,7 +71,7 @@ export const MoveToTeamModal = ({
               setSelectedTeamId(value);
             }}
             name='teamOption'
-            label='Select a team below'
+            label={t('selectTeamBelow')}
             classNames={{ label: 'text-base font-semibold' }}
             className='flex flex-col justify-between gap-4'
           >

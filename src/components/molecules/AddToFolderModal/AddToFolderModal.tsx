@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { FaFolderPlus } from 'react-icons/fa6';
 import {
   Box,
@@ -29,7 +30,7 @@ export const AddToFolderModal = ({
 }: AddToFolderModalProps) => {
   const { activeTeam, selectedRecords, setSelectedRecords } =
     useOverviewContext();
-
+  const { t } = useTranslation();
   const disabledFolderOptions = selectedRecords.map(
     (form) => form.folderId && form.folderId.toString(),
   );
@@ -81,7 +82,7 @@ export const AddToFolderModal = ({
     <Modal
       {...props}
       headerIcon={<FaFolderPlus className='text-white' />}
-      headerTitle='Add to folder'
+      headerTitle={t('addToFolder')}
       body={
         <Box className='px-3 py-8'>
           <Radio.Group
@@ -91,7 +92,7 @@ export const AddToFolderModal = ({
               setSelectedFolderId(value);
             }}
             name='folderOption'
-            label='Select a folder below'
+            label={t('selectFolderBelow')}
             classNames={{ label: 'text-base font-semibold' }}
             className='flex flex-col justify-between gap-4'
           >

@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { IoIosWarning } from 'react-icons/io';
 import { LuExternalLink } from 'react-icons/lu';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
@@ -42,7 +43,7 @@ export const TopBar = () => {
     initLogo,
     initTitle,
   } = useBuildFormContext();
-
+  const { t } = useTranslation();
   const { setElements } = useElementLayouts();
 
   const [opened, { open: openConfirmModal, close: closeConfirmModal }] =
@@ -128,7 +129,7 @@ export const TopBar = () => {
             />
             <ActionIcon
               component='button'
-              aria-label='Open in a new tab'
+              aria-label={t('openNewTab')}
               onClick={() => {
                 window.open(formURL, '_blank');
               }}
@@ -139,7 +140,7 @@ export const TopBar = () => {
             </ActionIcon>
           </Group>
           <ToggleButton
-            label='Preview form'
+            label={t('previewForm')}
             className='absolute right-10 top-[50%] -translate-y-1/2 text-sm text-white'
             isEnable={previewMode}
             handleToggleButton={handleClickPreviewButton}
@@ -161,12 +162,12 @@ export const TopBar = () => {
                 value={tab.value}
                 className='h-full min-w-40 rounded-[0] px-8 text-lg text-white duration-150 hover:bg-activeTabBackground'
               >
-                {tab.title}
+                {t(tab.title)}
               </MantineTabs.Tab>
             ))}
           </MantineTabs.List>
           <ToggleButton
-            label='Preview form'
+            label={t('previewForm')}
             className='absolute right-10 top-[50%] -translate-y-1/2 text-sm text-white'
             isEnable={previewMode}
             handleToggleButton={handleClickPreviewButton}
@@ -180,26 +181,25 @@ export const TopBar = () => {
             <Box className='flex flex-col items-center gap-3 px-10'>
               <IoIosWarning className='size-28 text-red-500' />
               <Text size='lg' className='font-bold'>
-                Unsaved Changes
+                {t('unsavedChanges')}
               </Text>
               <Text className='text-center text-[15px]'>
-                You have made changes that haven't been saved yet.
+                {t('notSavedYet')}
                 <br />
-                These changes will be lost if you leave the page without saving
-                them.
+                {t('lostIfLeave')}
                 <br />
-                Are you sure you want to discard changes?
+                {t('wantDiscardChanges')}
               </Text>
             </Box>
           ) : (
             <Box className='flex flex-col items-center gap-3 px-10'>
               <IoIosWarning className='size-24 text-yellow-500' />
               <Text size='lg' className='font-bold'>
-                Uncreated Form
+                {t('uncreatedForm')}
               </Text>
               <Text className='text-center text-[15px]'>
-                Your form hasn't been created yet. <br />
-                Please make sure to save this form before leave the page.
+                {t('formNotCreatedYet')} <br />
+                {t('makeSureSaveFormBeforeLeave')}
               </Text>
             </Box>
           )
@@ -209,11 +209,11 @@ export const TopBar = () => {
         onClickBack={closeConfirmModal}
         onClickConfirm={handleDiscardChanges}
         backButtonProps={{
-          title: 'Keep editing',
+          title: t('keepEditing'),
           className: !formId ? 'hidden' : '',
         }}
         confirmButtonProps={{
-          title: 'Discard changes',
+          title: t('discardChanges'),
           className: !formId ? 'hidden' : 'bg-red-500 hover:bg-red-600',
         }}
         isLoading={false}

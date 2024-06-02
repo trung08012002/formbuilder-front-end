@@ -1,6 +1,7 @@
 import { IoTrash } from 'react-icons/io5';
 import { Text } from '@mantine/core';
 import FileSaver from 'file-saver';
+import { t } from 'i18next';
 
 import { Button } from '@/atoms/Button';
 import { ResponseRow } from '@/molecules/ResponsesTable';
@@ -70,7 +71,7 @@ export const TopBarSubmission = (props: TopBarSubmission) => {
               }
             })
           }
-          title='Export'
+          title={t('export')}
         />
       </div>
     );
@@ -79,7 +80,7 @@ export const TopBarSubmission = (props: TopBarSubmission) => {
     <div className='flex w-full items-center justify-between p-4'>
       <div className='flex items-center justify-between gap-3'>
         <Text className='text-[15px] text-gray-600'>
-          {`Selected ${selectedResponseIds.length} ${selectedResponseIds.length === 1 ? 'record' : 'records'}`}
+          {`${t('selected')} ${selectedResponseIds.length} ${selectedResponseIds.length === 1 ? t('record') : t('records')}`}
         </Text>
         <Button
           className='h-[36px]'
@@ -87,8 +88,8 @@ export const TopBarSubmission = (props: TopBarSubmission) => {
           onClick={handleSelectAllOrDeselectClick}
           title={
             showingResponseRows.length > selectedResponseIds.length
-              ? 'Select all'
-              : 'Unselect all'
+              ? t('select')
+              : t('unSelectAll')
           }
         />
       </div>
@@ -101,7 +102,7 @@ export const TopBarSubmission = (props: TopBarSubmission) => {
         color='error'
         onClick={handleDeleteOneOrMultiple}
         leftSection={<IoTrash size={18} />}
-        title='Delete'
+        title={t('delete')}
       />
     </div>
   );

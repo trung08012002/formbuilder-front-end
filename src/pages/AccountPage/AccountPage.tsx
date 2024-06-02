@@ -1,4 +1,5 @@
 import { ChangeEvent, useEffect, useMemo, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   Avatar,
   Box,
@@ -29,7 +30,7 @@ import {
   usernameValidationSchema,
 } from '@/utils';
 
-enum UserProfileFields {
+export enum UserProfileFields {
   USERNAME = 'username',
   AVATAR = 'avatar',
   PASSWORD = 'password',
@@ -56,7 +57,7 @@ const emptyInitialValues = {
 
 export const AccountPage = () => {
   const { data: myProfile } = useGetMyProfileQuery();
-
+  const { t } = useTranslation();
   const [
     updateProfile,
     { isSuccess: isUpdateProfileSuccess, error: updateProfileError },
@@ -257,14 +258,14 @@ export const AccountPage = () => {
         editingFieldName === UserProfileFields.USERNAME ? (
           <form onSubmit={handleSubmit} className='flex w-1/2 flex-col gap-3'>
             <Input
-              placeholder='Username'
+              placeholder={t('username')}
               {...getFieldProps(UserProfileFields.USERNAME)}
               autoFocus
             />
             {errors.username && touched.username && (
               <Text className='text-xs text-red-500'>{errors.username}</Text>
             )}
-            <Button title='Save' type='submit' />
+            <Button title={t('save')} type='submit' />
           </form>
         ) : (
           <Text>{myProfile?.username}</Text>
@@ -278,7 +279,7 @@ export const AccountPage = () => {
         editingFieldName === UserProfileFields.PASSWORD ? (
           <form onSubmit={handleSubmit} className='flex w-1/2 flex-col gap-3'>
             <PasswordInput
-              placeholder='Current password'
+              placeholder={t('currentPassword')}
               {...getFieldProps(UserProfileFields.PASSWORD)}
               autoFocus
             />
@@ -286,14 +287,14 @@ export const AccountPage = () => {
               <Text className='text-xs text-red-500'>{errors.password}</Text>
             )}
             <PasswordInput
-              placeholder='New password'
+              placeholder={t('newPassword')}
               {...getFieldProps(UserProfileFields.NEW_PASSWORD)}
             />
             {errors.newPassword && touched.newPassword && (
               <Text className='text-xs text-red-500'>{errors.newPassword}</Text>
             )}
             <PasswordInput
-              placeholder='Confirm password'
+              placeholder={t('confirmPassword')}
               {...getFieldProps(UserProfileFields.CONFIRM_PASSWORD)}
             />
             {errors.confirmPassword && touched.confirmPassword && (
@@ -302,9 +303,9 @@ export const AccountPage = () => {
               </Text>
             )}
             <Group>
-              <Button title='Save' className='flex-1' type='submit' />
+              <Button title={t('save')} className='flex-1' type='submit' />
               <Button
-                title='Cancel'
+                title={t('cancel')}
                 color='gray'
                 className='flex-1'
                 onClick={handleCancelEdit}
@@ -313,7 +314,7 @@ export const AccountPage = () => {
           </form>
         ) : (
           <Button
-            title='Change password'
+            title={t('changePassword')}
             onClick={() => handleEdit(UserProfileFields.PASSWORD)}
           />
         ),
@@ -341,14 +342,14 @@ export const AccountPage = () => {
               accept='image/*'
             />
             <Button
-              title='Save'
+              title={t('save')}
               onClick={(
                 event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
               ) => handleUpdateImage(event, UploadImage.AVATAR)}
               disabled={isUploadingImage}
             />
             <Button
-              title='Cancel'
+              title={t('cancel')}
               color='gray'
               onClick={() => {
                 setCurrentImages((prev) => ({
@@ -382,11 +383,11 @@ export const AccountPage = () => {
             {myProfile?.avatarUrl ? (
               <>
                 <Button
-                  title='Change avatar'
+                  title={t('changeAvatar')}
                   onClick={() => handleChooseImage(UploadImage.AVATAR)}
                 />
                 <Button
-                  title='Remove'
+                  title={t('remove')}
                   variant='outline'
                   onClick={(event) => {
                     handleRemoveImage(event, UploadImage.AVATAR);
@@ -395,7 +396,7 @@ export const AccountPage = () => {
               </>
             ) : (
               <Button
-                title='Upload avatar'
+                title={t('uploadAvatar')}
                 onClick={() => handleChooseImage(UploadImage.AVATAR)}
               />
             )}
@@ -413,14 +414,14 @@ export const AccountPage = () => {
             className='flex w-1/2 flex-col justify-between gap-3'
           >
             <Input
-              placeholder='Email'
+              placeholder={t('email')}
               {...getFieldProps(UserProfileFields.EMAIL)}
               autoFocus
             />
             {errors.email && touched.email && (
               <Text className='text-xs text-red-500'>{errors.email}</Text>
             )}
-            <Button title='Save' type='submit' />
+            <Button title={t('save')} type='submit' />
           </form>
         ) : (
           <Text>{myProfile?.email}</Text>
@@ -434,7 +435,7 @@ export const AccountPage = () => {
         editingFieldName === UserProfileFields.ORGANIZATION_NAME ? (
           <form onSubmit={handleSubmit} className='flex w-1/2 flex-col gap-3'>
             <Input
-              placeholder='Organization name'
+              placeholder={t('organizationNameLabel')}
               {...getFieldProps(UserProfileFields.ORGANIZATION_NAME)}
               autoFocus
             />
@@ -443,7 +444,7 @@ export const AccountPage = () => {
                 {errors.organizationName}
               </Text>
             )}
-            <Button title='Save' type='submit' />
+            <Button title={t('save')} type='submit' />
           </form>
         ) : (
           <Text>{myProfile?.organizationName}</Text>
@@ -472,14 +473,14 @@ export const AccountPage = () => {
               accept='image/*'
             />
             <Button
-              title='Save'
+              title={t('save')}
               onClick={(
                 event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
               ) => handleUpdateImage(event, UploadImage.LOGO)}
               disabled={isUploadingImage}
             />
             <Button
-              title='Cancel'
+              title={t('cancel')}
               color='gray'
               onClick={() => {
                 setCurrentImages((prev) => ({
@@ -513,11 +514,11 @@ export const AccountPage = () => {
             {myProfile?.organizationLogo ? (
               <>
                 <Button
-                  title='Change logo'
+                  title={t('changeLogo')}
                   onClick={() => handleChooseImage(UploadImage.LOGO)}
                 />
                 <Button
-                  title='Remove'
+                  title={t('remove')}
                   variant='outline'
                   onClick={(event) => {
                     handleRemoveImage(event, UploadImage.LOGO);
@@ -526,7 +527,7 @@ export const AccountPage = () => {
               </>
             ) : (
               <Button
-                title='Add organization logo'
+                title={t('addOrganizationLogo')}
                 onClick={() => handleChooseImage(UploadImage.LOGO)}
               />
             )}
@@ -569,7 +570,7 @@ export const AccountPage = () => {
       <Stack className='px-40 pb-8 pt-5'>
         <Stack className='items-center justify-center gap-12 rounded-xl bg-white px-14 py-7'>
           <Text className='text-center text-[26px] font-semibold'>
-            Update Account and General Information
+            {t('updateAccount')}
           </Text>
           <Stack className='w-full gap-5'>
             {userInfoItems.map((item, index) => (

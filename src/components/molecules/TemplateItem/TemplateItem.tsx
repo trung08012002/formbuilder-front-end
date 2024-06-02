@@ -1,4 +1,5 @@
 import { useMemo, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { IoEye } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom';
 import { Modal, Text, Title, UnstyledButton } from '@mantine/core';
@@ -38,6 +39,7 @@ export const TemplateItem = (props: TemplateItemProps) => {
   const imageRef = useRef<HTMLImageElement>(null);
   const [opened, { open, close }] = useDisclosure(false);
   const { data } = useGetTemplateQueryDetailsQuery({ templateId: id });
+  const { t } = useTranslation();
   const updatedData = useMemo(
     () =>
       ({
@@ -55,7 +57,7 @@ export const TemplateItem = (props: TemplateItemProps) => {
         opened={opened}
         onClose={close}
         size='lg'
-        title={<Title order={2}>Preview Template</Title>}
+        title={<Title order={2}>{t('previewTemplate')}</Title>}
       >
         <PreviewTemplate form={updatedData} />
       </Modal>
@@ -72,7 +74,7 @@ export const TemplateItem = (props: TemplateItemProps) => {
         >
           <div className='flex items-center gap-2'>
             <IoEye className='text-white' />
-            <Text className='text-white'>Preview</Text>
+            <Text className='text-white'>{t('preview')}</Text>
           </div>
         </motion.button>
         <motion.div
@@ -113,7 +115,7 @@ export const TemplateItem = (props: TemplateItemProps) => {
         </div>
       </UnstyledButton>
       <Button
-        title='Use Template'
+        title={t('useTemplate')}
         variant='outline'
         onClick={() =>
           navigate(PATH.BUILD_FORM_PAGE, { state: { templateId: id } })

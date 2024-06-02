@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { FaSave } from 'react-icons/fa';
 import { Box, LoadingOverlay, Tooltip, UnstyledButton } from '@mantine/core';
 
@@ -19,10 +20,11 @@ export const SaveButton = ({
   handleSave,
 }: SaveButtonProps) => {
   const isScrolling = useScroll(HEADER_HEIGHT);
+  const { t } = useTranslation();
 
   return (
     <Tooltip
-      label='Save changes'
+      label={t('saveChanges')}
       position='left'
       arrowSize={6}
       withArrow

@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { CiSearch } from 'react-icons/ci';
 import { IoCloseOutline } from 'react-icons/io5';
 import { ActionIcon, Box, Group, Stack, Text, TextInput } from '@mantine/core';
@@ -20,7 +21,7 @@ export const BuildChartLeftBar = ({
   setCurrentElementType,
 }: BuildChartLeftBarProps) => {
   const [searchValue, setSearchValue] = useState('');
-
+  const { t } = useTranslation();
   const handleDrop = (elementType: ChartCustomType) => {
     setCurrentElementType(elementType);
   };
@@ -59,7 +60,7 @@ export const BuildChartLeftBar = ({
           <TextInput
             value={searchValue}
             onChange={handleOnChangeSearchValue}
-            placeholder='Search fields'
+            placeholder={t('searchFields')}
             size='md'
             leftSection={<CiSearch size={16} />}
             rightSection={
@@ -81,7 +82,7 @@ export const BuildChartLeftBar = ({
           <Stack key={`category-${index}`} className='gap-0'>
             <Box className='flex p-2 '>
               <Text className='mt-6 text-sm font-medium text-gray-400'>
-                {elementType.title}
+                {t(elementType.title)}
               </Text>
             </Box>
             <Box className='mt-3 grid grid-cols-2 gap-2 gap-y-4 lg:grid-cols-2'>

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { FaStar } from 'react-icons/fa';
 import { IoTrash } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom';
@@ -16,6 +17,7 @@ import { cn } from '@/utils';
 export const OverviewSidebar = () => {
   const [folderName, setFolderName] = useState<string>('');
   const [folderId, setFolderId] = useState<number>(0);
+  const { t } = useTranslation();
 
   const {
     activeFolder,
@@ -39,7 +41,7 @@ export const OverviewSidebar = () => {
       <Box className='sticky top-0 z-10 w-full border border-x-0 border-solid border-slate-300 bg-inherit px-5 py-4 text-center'>
         <Button
           size='md'
-          title='CREATE FORM'
+          title={t('createForm').toUpperCase()}
           className='w-full font-bold'
           onClick={() =>
             navigate(PATH.BUILD_FORM_PAGE, {
@@ -76,7 +78,7 @@ export const OverviewSidebar = () => {
                 'bg-slate-300 hover:bg-slate-300': params.isFavourite,
               },
             )}
-            label='Favorites'
+            label={t('favorites')}
             leftSection={<FaStar className='text-amber-500' />}
             onClick={() => {
               setParams({
@@ -96,7 +98,7 @@ export const OverviewSidebar = () => {
                 'bg-slate-300 hover:bg-slate-300': params.isDeleted,
               },
             )}
-            label='Trash'
+            label={t('trash')}
             leftSection={<IoTrash className='text-gray-600' />}
             onClick={() => {
               setParams({

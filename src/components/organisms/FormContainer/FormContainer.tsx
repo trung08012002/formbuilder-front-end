@@ -1,4 +1,5 @@
 import { ChangeEvent, useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { IoIosAdd } from 'react-icons/io';
 import { IoClose } from 'react-icons/io5';
 import { useLocation } from 'react-router-dom';
@@ -38,7 +39,7 @@ export const FormContainer = ({
 }: FormContainerProps) => {
   const { setForm, initLogo, currentLogo, setCurrentLogo } =
     useBuildFormContext();
-
+  const { t } = useTranslation();
   const logoInputRef = useRef<HTMLInputElement>(null);
 
   const { elements, setElements, edittingItem, setEdittingItem } =
@@ -165,7 +166,7 @@ export const FormContainer = ({
                   className='hidden'
                 />
                 <Button
-                  title='Add your logo'
+                  title={t('addYourLogo')}
                   variant='subtle'
                   color='gray'
                   leftSection={<IoIosAdd size={16} />}

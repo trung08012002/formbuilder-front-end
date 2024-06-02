@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { IoCloseCircle } from 'react-icons/io5';
 import { ActionIcon, Popover, Text, UnstyledButton } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
@@ -22,17 +23,18 @@ export const ImportFromUrlButton = (props: ImportFromUrlButtonProps) => {
   const [opened, { close, toggle }] = useDisclosure(false);
   const { setForm, form } = useBuildFormContext();
   const [importGoogleForm] = useImportGoogleFormMutation();
+  const { t } = useTranslation();
 
   return (
     <Popover position='right' shadow='md' opened={opened}>
       <Popover.Target>
         <UnstyledButton onClick={toggle}>
-          Import from Google Form Url...
+          {t('importFromGoogle')}
         </UnstyledButton>
       </Popover.Target>
       <Popover.Dropdown>
         <div className='mb-5 flex items-center justify-between'>
-          <Text>IMPORT URL</Text>
+          <Text>{t('importUrl')}</Text>
           <ActionIcon onClick={close}>
             <IoCloseCircle />
           </ActionIcon>

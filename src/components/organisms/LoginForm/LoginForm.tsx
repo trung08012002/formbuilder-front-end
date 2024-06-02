@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { Center } from '@mantine/core';
 import { Field, Form, Formik } from 'formik';
@@ -23,6 +24,7 @@ export const LoginForm = (props: LoginFormProps) => {
     email: '',
     password: '',
   };
+  const { t } = useTranslation();
 
   return (
     <Formik
@@ -36,7 +38,7 @@ export const LoginForm = (props: LoginFormProps) => {
         <Field
           classNameWrapper='mb-3'
           name='email'
-          label='Email'
+          label={t('email')}
           classNameError='min-h-0'
           component={TextInput}
         />
@@ -44,21 +46,21 @@ export const LoginForm = (props: LoginFormProps) => {
         <Field
           classNameWrapper='mb-3'
           name='password'
-          label='Password'
+          label={t('password')}
           classNameError='min-h-0'
           component={PasswordInput}
         />
 
         <Center className='py-2'>
-          <Button title='Login' type='submit' className='w-full' />
+          <Button title={t('login')} type='submit' className='w-full' />
         </Center>
         <div className='mt-3 flex items-center justify-center text-xs'>
-          <span>Don't have an account?</span>
+          <span>{t('doNotHaveAccount')}</span>
           <Link
             to={PATH.SIGNUP_PAGE}
             className='ml-1 text-malachite-500 no-underline hover:font-medium hover:text-malachite-600'
           >
-            Sign Up
+            {t('signUp')}
           </Link>
         </div>
       </Form>

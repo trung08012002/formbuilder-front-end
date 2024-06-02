@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { CiSearch } from 'react-icons/ci';
 import { FaWandMagicSparkles } from 'react-icons/fa6';
 import { IoCloseOutline } from 'react-icons/io5';
@@ -41,6 +42,7 @@ export const BuildFormLeftbar = ({
   const { elements, setElements } = useElementLayouts();
   const [getElementsFromQuestion] = useGetElementsFromQuestionMutation();
   const [searchValue, setSearchValue] = useState('');
+  const { t } = useTranslation();
   const hasSubmitButton = elements.some(
     (element) => element.type === ElementType.SUBMIT,
   );
@@ -84,7 +86,7 @@ export const BuildFormLeftbar = ({
             <TextInput
               value={searchValue}
               onChange={handleOnChangeSearchValue}
-              placeholder='Search fields'
+              placeholder={t('searchFields')}
               size='md'
               leftSection={<CiSearch size={16} />}
               rightSection={
@@ -119,9 +121,11 @@ export const BuildFormLeftbar = ({
                 <Popover.Dropdown>
                   <Tabs defaultValue='One question'>
                     <Tabs.List>
-                      <Tabs.Tab value='One question'>One question</Tabs.Tab>
+                      <Tabs.Tab value='One question'>
+                        {t('oneQuestion')}
+                      </Tabs.Tab>
                       <Tabs.Tab value='Multiple questions'>
-                        Multiple questions
+                        {t('multipleQuestions')}
                       </Tabs.Tab>
                     </Tabs.List>
                     <Tabs.Panel value='One question'>
@@ -160,7 +164,7 @@ export const BuildFormLeftbar = ({
                               name='oneQuestion'
                               classNameWrapper='w-full min-h-[124px]'
                               validate={validateQuestion}
-                              placeholder='Describe the question you want to add with AI...'
+                              placeholder={t('questionPlaceHolder')}
                               size='sm'
                               component={Textarea}
                               resize={'none'}
@@ -209,7 +213,7 @@ export const BuildFormLeftbar = ({
                               readOnly={false}
                               name='multipleQuestions'
                               classNameWrapper='w-full min-h-[124px]'
-                              placeholder='Describe the question you want to add with AI...'
+                              placeholder={t('questionPlaceHolder')}
                               validate={validateQuestion}
                               size='sm'
                               component={Textarea}
@@ -237,7 +241,7 @@ export const BuildFormLeftbar = ({
           <Stack key={`category-${index}`} className='gap-0'>
             <Box className='flex p-2 '>
               <Text className='mt-6 text-sm font-medium text-gray-400'>
-                {elementType.title}
+                {t(elementType.title)}
               </Text>
             </Box>
             <Box className='mt-3 grid grid-cols-2 gap-2 gap-y-4 lg:grid-cols-2'>
@@ -262,7 +266,7 @@ export const BuildFormLeftbar = ({
                       </Group>
                     ) : (
                       <Tooltip
-                        label='Your form already has one submit button'
+                        label={t('warningSubmitButton')}
                         position='right'
                         arrowSize={6}
                         withArrow
