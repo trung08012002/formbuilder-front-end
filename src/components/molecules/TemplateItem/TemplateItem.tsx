@@ -38,7 +38,10 @@ export const TemplateItem = (props: TemplateItemProps) => {
   const { hovered, ref } = useHover();
   const imageRef = useRef<HTMLImageElement>(null);
   const [opened, { open, close }] = useDisclosure(false);
-  const { data } = useGetTemplateQueryDetailsQuery({ templateId: id });
+  const { data } = useGetTemplateQueryDetailsQuery({
+    templateId: id,
+    filter: false,
+  });
   const { t } = useTranslation();
   const updatedData = useMemo(
     () =>

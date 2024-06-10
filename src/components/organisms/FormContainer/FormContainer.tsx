@@ -80,6 +80,7 @@ export const FormContainer = ({
     if (!state?.templateId) return;
     getTemplateDetails({
       templateId: Number(state.templateId),
+      filter: true,
     }).then((template) => {
       if ('data' in template) {
         setElements([

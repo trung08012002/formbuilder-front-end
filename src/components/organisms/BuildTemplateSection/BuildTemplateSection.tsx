@@ -1,17 +1,18 @@
-import { useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useEffect, useRef, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Box } from '@mantine/core';
 import { Form, Formik } from 'formik';
 import html2canvas from 'html2canvas';
 import _isEqual from 'lodash.isequal';
 
+import { PATH } from '@/constants';
 import { useBuildFormContext, useElementLayouts } from '@/contexts';
 import { SaveButton } from '@/molecules/SaveButton';
 import { TemplateExtraInfo } from '@/pages/BuildTemplatePage';
-import { useGetFormDetailsQuery } from '@/redux/api/formApi';
 import { useUploadImageMutation } from '@/redux/api/imageApi';
 import {
   useCreateTemplateMutation,
+  useGetTemplateQueryDetailsQuery,
   useUpdateTemplateMutation,
 } from '@/redux/api/templateApi';
 import { ElementType, ErrorResponse } from '@/types';
@@ -31,8 +32,9 @@ export interface BuildTemplateSectionProps {
 
 export const BuildTemplateSection = (props: BuildTemplateSectionProps) => {
   const { templateExtraInfo } = props;
-  const { form, isEditForm, toggledRightbar } = useBuildFormContext();
+  const { form, isEditForm, toggledRightbar, setForm } = useBuildFormContext();
   const { id: templateId } = useParams();
+
   const captureRef = useRef(null);
   const { setEdittingItem } = useElementLayouts();
   const [currentElementType, setCurrentElementType] = useState<ElementType>();
@@ -44,10 +46,17 @@ export const BuildTemplateSection = (props: BuildTemplateSectionProps) => {
     useUpdateTemplateMutation();
   const [uploadImage, { isLoading: isUploadingImage }] =
     useUploadImageMutation();
-
   const { data: formData, isLoading: isLoadingGetFormDetails } =
-    useGetFormDetailsQuery({ id: templateId || '' }, { skip: !templateId });
-
+    useGetTemplateQueryDetailsQuery(
+      { templateId: Number(templateId), filter: false },
+      { skip: !templateId },
+    );
+  useEffect(() => {
+    if (!formData) return;
+    setForm((prev) => ({ ...prev, ...formData }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [formData]);
+  const navigate = useNavigate();
   const handleCapture = async () => {
     if (captureRef.current === null) return new File([], '');
     const canvas = await html2canvas(captureRef.current);
@@ -84,7 +93,7 @@ export const BuildTemplateSection = (props: BuildTemplateSectionProps) => {
           }).then((res) => {
             if ('data' in res) {
               toastify.displaySuccess(res.data.message);
-              return;
+              return navigate(`${PATH.CREATE_TEMPLATE}/${res.data.data.id}`);
             }
             return toastify.displayError((res.error as ErrorResponse).message);
           });
@@ -101,7 +110,7 @@ export const BuildTemplateSection = (props: BuildTemplateSectionProps) => {
       }).then((res) => {
         if ('data' in res) {
           toastify.displaySuccess(res.data.message);
-          return;
+          return navigate(`${PATH.CREATE_TEMPLATE}/${res.data.data.id}`);
         }
         return toastify.displayError((res.error as ErrorResponse).message);
       });

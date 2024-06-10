@@ -131,13 +131,6 @@ export function useRouteElements() {
               </ElementLayoutProvider>
             </BuildFormContextProvider>
           ),
-          children: [
-            { path: 'preview', element: <PreviewSection /> },
-            {
-              path: 'setting/preview',
-              element: <PreviewSection />,
-            },
-          ],
         },
         {
           path: PATH.EDIT_FORM_PAGE,
