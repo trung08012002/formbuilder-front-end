@@ -35,7 +35,7 @@ const templateApi = rootApi.injectEndpoints({
       transformResponse: (
         response: SuccessResponse<GetTemplatesDetailsResponse>,
       ) => response.data,
-      providesTags: (result, error, { templateId }) => [
+      providesTags: (_result, _error, { templateId }) => [
         { type: 'Templates', id: templateId },
       ],
     }),
