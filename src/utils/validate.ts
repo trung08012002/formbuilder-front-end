@@ -29,4 +29,4 @@ export const validateUrl = async (value: string) =>
   await requiredUrl
     .validate(value)
     .then(() => {})
-    .catch((err) => err.errors.map((error) => i18next.t(error)));
+    .catch((err) => err.errors.map((error: string) => i18next.t(error)));

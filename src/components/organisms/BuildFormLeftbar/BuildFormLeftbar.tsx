@@ -23,7 +23,7 @@ import { ImportFromUrlButton } from '@/molecules/ImportFromUrlButton';
 import { QuestionFooter } from '@/molecules/QuestionFooter';
 import { Textarea } from '@/molecules/Textarea';
 import { useGetElementsFromQuestionMutation } from '@/redux/api/openAiApi';
-import { ElementItem, ElementType } from '@/types';
+import { ElementConfig, ElementItem, ElementType } from '@/types';
 import { cn, validateQuestion } from '@/utils';
 import { createElement } from '@/utils/elements';
 
@@ -139,7 +139,10 @@ export const BuildFormLeftbar = ({
                               setElements([
                                 ...elements,
                                 ...elementsResponse.data.data.elements.map(
-                                  (elementResponse) =>
+                                  (elementResponse: {
+                                    elementType: ElementType;
+                                    config: ElementConfig;
+                                  }) =>
                                     createElement(
                                       elementResponse.elementType,
                                       elementResponse.config,
@@ -189,7 +192,10 @@ export const BuildFormLeftbar = ({
                               setElements([
                                 ...elements,
                                 ...elementsResponse.data.data.elements.map(
-                                  (elementResponse) =>
+                                  (elementResponse: {
+                                    elementType: ElementType;
+                                    config: ElementConfig;
+                                  }) =>
                                     createElement(
                                       elementResponse.elementType,
                                       elementResponse.config,
