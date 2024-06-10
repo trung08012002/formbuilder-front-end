@@ -1,11 +1,9 @@
 import { ChangeEvent, forwardRef, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { IoIosAdd } from 'react-icons/io';
-import { IoClose } from 'react-icons/io5';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import {
   Box,
-  CloseButton,
   Divider,
   Group,
   Image,
@@ -35,8 +33,7 @@ export const TemplateContainer = forwardRef<
   HTMLDivElement,
   TemplateContainerProps
 >(({ currentElementType, setCurrentLogoFile, isDisabled, isLoading }, ref) => {
-  const { setForm, initLogo, currentLogo, setCurrentLogo } =
-    useBuildFormContext();
+  const { setForm, currentLogo, setCurrentLogo } = useBuildFormContext();
 
   const logoInputRef = useRef<HTMLInputElement>(null);
 
@@ -73,16 +70,17 @@ export const TemplateContainer = forwardRef<
     }
     event.target.value = '';
   };
-  const { state } = useLocation();
+  const { id: templateId } = useParams();
 
   const [getTemplateDetails] = useGetTemplateDetailsMutation();
   useEffect(() => {
-    if (!state?.templateId) return;
+    if (!templateId) return;
     getTemplateDetails({
-      templateId: Number(state.templateId),
+      templateId: Number(templateId),
       filter: true,
     }).then((template) => {
       if ('data' in template) {
+        setCurrentLogo(template.data.logoUrl);
         setElements([
           ...elements,
           ...template.data.elements.map(
@@ -96,10 +94,6 @@ export const TemplateContainer = forwardRef<
       }
     });
   }, []);
-
-  useEffect(() => {
-    setCurrentLogo(initLogo);
-  }, [initLogo, setCurrentLogo]);
 
   const updateItem = (item: ElementItem) => {
     setElements(
@@ -138,21 +132,6 @@ export const TemplateContainer = forwardRef<
               className='h-36 w-72 flex-1 cursor-pointer object-cover'
               onClick={handleClickAddLogo}
             />
-            {currentLogo === initLogo || (
-              <CloseButton
-                radius='lg'
-                size='sm'
-                icon={<IoClose size={14} />}
-                onClick={() => {
-                  setCurrentLogo(initLogo);
-                  setForm((prevState) => ({
-                    ...prevState,
-                    logoUrl: initLogo,
-                  }));
-                }}
-                className='absolute right-1 top-1 cursor-pointer bg-slate-200 p-0.5 text-slate-600 opacity-90 hover:bg-slate-300'
-              />
-            )}
           </Group>
         ) : (
           <Divider
