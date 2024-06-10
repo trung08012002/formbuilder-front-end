@@ -1,8 +1,8 @@
 # FE-Jan Internship-2024
 
-Project Name : **_Formify App_**
+Project Name : **FormBuilder App_**
 
-Welcome to the Formify App, a powerful and user-friendly tool designed to simplify the process of creating dynamic forms. Our app empowers you to build customized forms effortlessly.
+Welcome to the FormBuilder App, a powerful and user-friendly tool designed to simplify the process of creating dynamic forms. Our app empowers you to build customized forms effortlessly.
 
 # Tech Stack
 
@@ -18,7 +18,7 @@ Node.js and npm installed
 
 **Installation Steps:**
 
-1. Clone the repository: **git clone [Github repo link](https://github.com/2024-Jan-Internship/formify-fe.git)**
+1. Clone the repository: **git clone [Github repo link](https://github.com/trung08012002/formbuilder-front-end)**
 
 2. Install dependencies: **npm install**
 
