@@ -12,6 +12,7 @@ export interface SettingSectionProps {
 export const SettingSection = (props: SettingSectionProps) => {
   const { templateExtraInfo, setTemplateExtraInfo } = props;
   const { data: categories } = useGetTemplateCategoryQuery();
+
   return (
     <Box className='relative flex h-screen w-full items-center justify-center bg-malachite-50'>
       <Stack className='absolute top-[50%] w-[660px] -translate-y-[50%]'>
@@ -20,6 +21,7 @@ export const SettingSection = (props: SettingSectionProps) => {
             <Select
               label='Select category:'
               placeholder='Pick value'
+              value={templateExtraInfo.categoryId.toString() || null}
               data={
                 categories === undefined
                   ? []
@@ -41,6 +43,7 @@ export const SettingSection = (props: SettingSectionProps) => {
               label='Description:'
               placeholder='Input your description template'
               classNames={{ input: 'min-h-[130px]' }}
+              defaultValue={templateExtraInfo.description}
               onChange={(event) =>
                 setTemplateExtraInfo({
                   ...templateExtraInfo,

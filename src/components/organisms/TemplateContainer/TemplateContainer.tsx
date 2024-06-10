@@ -22,7 +22,7 @@ import { toastify } from '@/utils';
 import { createElement } from '@/utils/elements';
 
 import { PropertiesRightbar } from '../PropertiesRightbar';
-import { ResponsiveGridLayout } from '../ResponsiveGridLayout';
+import { ResponsiveGridLayoutTemplate } from '../ResponseGridLayoutTemplate';
 
 interface TemplateContainerProps {
   currentElementType?: ElementType;
@@ -80,6 +80,7 @@ export const TemplateContainer = forwardRef<
     if (!state?.templateId) return;
     getTemplateDetails({
       templateId: Number(state.templateId),
+      filter: true,
     }).then((template) => {
       if ('data' in template) {
         setElements([
@@ -188,7 +189,7 @@ export const TemplateContainer = forwardRef<
             loaderProps={{ color: 'green' }}
           />
           <div ref={ref}>
-            <ResponsiveGridLayout
+            <ResponsiveGridLayoutTemplate
               currentElementType={currentElementType!}
               updateItem={updateItem}
               handleConfig={handleConfig}

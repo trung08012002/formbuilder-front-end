@@ -26,25 +26,37 @@ const templateApi = rootApi.injectEndpoints({
     }),
     getTemplateQueryDetails: build.query<
       GetTemplatesDetailsResponse,
-      { templateId: number }
+      { templateId: number; filter?: boolean }
     >({
-      query: ({ templateId }: { templateId: number }) => ({
-        url: `/${API_URL.TEMPLATES}/${templateId}`,
+      query: ({
+        templateId,
+        filter = true,
+      }: {
+        templateId: number;
+        filter?: boolean;
+      }) => ({
+        url: `/${API_URL.TEMPLATES}/${templateId}?filter=${filter}`,
         method: 'GET',
       }),
       transformResponse: (
         response: SuccessResponse<GetTemplatesDetailsResponse>,
       ) => response.data,
-      providesTags: (result, error, { templateId }) => [
+      providesTags: (_result, _error, { templateId }) => [
         { type: 'Templates', id: templateId },
       ],
     }),
     getTemplateDetails: build.mutation<
       GetTemplatesDetailsResponse,
-      { templateId: number }
+      { templateId: number; filter?: boolean }
     >({
-      query: ({ templateId }: { templateId: number }) => ({
-        url: `/${API_URL.TEMPLATES}/${templateId}`,
+      query: ({
+        templateId,
+        filter,
+      }: {
+        templateId: number;
+        filter?: boolean;
+      }) => ({
+        url: `/${API_URL.TEMPLATES}/${templateId}?filter=${filter}`,
         method: 'GET',
       }),
       transformResponse: (

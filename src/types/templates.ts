@@ -38,6 +38,8 @@ export interface GetTemplatesDetailsResponse {
   title: string;
   logoUrl: string;
   settings: object;
+  categoryId: number;
+  description: string;
 }
 
 export interface CreateTemplateRequest {
