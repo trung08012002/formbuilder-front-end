@@ -79,7 +79,7 @@ export const BuildFormContextProvider: React.FC<{ children: ReactNode }> = ({
 
   const { data } = useGetFormDetailsQuery(
     { id: formId || '' },
-    { skip: !formId },
+    { skip: !formId || pathname.includes('template') },
   );
 
   const initLogo = data?.logoUrl || '';
