@@ -51,6 +51,7 @@ export const BuildTemplateSection = (props: BuildTemplateSectionProps) => {
       { templateId: Number(templateId), filter: false },
       { skip: !templateId },
     );
+
   useEffect(() => {
     if (!formData) return;
     setForm((prev) => ({ ...prev, ...formData }));

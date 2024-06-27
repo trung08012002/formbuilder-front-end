@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { IoCloseCircle } from 'react-icons/io5';
+import { toast } from 'react-toastify';
 import { ActionIcon, Popover, Text, UnstyledButton } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { Field, Formik } from 'formik';
@@ -44,6 +45,13 @@ export const ImportFromUrlButton = (props: ImportFromUrlButtonProps) => {
           onSubmit={(values) => {
             importGoogleForm({ formUrl: values.formUrl }).then(
               (formResponse) => {
+                if ('error' in formResponse) {
+                  toast.error(
+                    (formResponse.error as { message: string }).message,
+                  );
+                  close();
+                  return;
+                }
                 if ('data' in formResponse) {
                   setForm({ ...form, title: formResponse.data.data.title });
                   setElements([
